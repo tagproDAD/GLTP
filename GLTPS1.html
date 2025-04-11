@@ -62,18 +62,15 @@
   </div>
 
   <div id="week1Page" class="page-container">
-    <h2>Week 1</h2>
-    <p>Info for Week 1 (maps, results, links, etc).</p>
+    <div id="week1Content">Loading week 1...</div>
   </div>
 
   <div id="week2Page" class="page-container">
-    <h2>Week 2</h2>
-    <p>Info for Week 2.</p>
+    <div id="week2Content">Loading week 2...</div>
   </div>
 
   <div id="week3Page" class="page-container">
-    <h2>Week 3</h2>
-    <p>Info for Week 3.</p>
+    <div id="week3Content">Loading week 3...</div>
   </div>
 
   <script>
@@ -109,9 +106,17 @@ fetch('gltpRosters.html')
   })
   .catch(err => {
     document.getElementById('rosterContent').innerHTML = "Failed to load roster.";
+    console.error("Error loading week1 file:", err);
+  });
+fetch('S1W1.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('week1Content').innerHTML = html;
+  })
+  .catch(err => {
+    document.getElementById('week1Content').innerHTML = "Failed to load roster.";
     console.error("Error loading roster file:", err);
   });
   </script>
-
 </body>
 </html>
