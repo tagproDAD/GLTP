@@ -46,11 +46,13 @@
 
   <div class="top-bar">
     <div class="nav">
-      <a id="rostersLink" class="active">GLTP Rosters</a>
+      <a id="homeLink" class="active">Home</a>
+      <a id="rostersLink" class="active">Rosters</a>
       <a id="linksLink">Info Links</a>
       <a id="week1Link">Week 1</a>
       <a id="week2Link">Week 2</a>
       <a id="week3Link">Week 3</a>
+      <a id="season1Link">Season 1</a>
     </div>
   </div>
 
@@ -74,17 +76,28 @@
     <div id="week3Content">Loading week 3...</div>
   </div>
 
-  <script>
+  <script><a id="season1Link">Season 1</a>
     const navItems = {
+      homeLink: 'homePage'
       rostersLink: 'rostersPage',
       linksLink: 'linksPage',
       week1Link: 'week1Page',
       week2Link: 'week2Page',
       week3Link: 'week3Page'
+      season1Link: 'season1Page'
     };
 
     Object.keys(navItems).forEach(linkId => {
       document.getElementById(linkId).addEventListener('click', () => {
+        // Handle the special case
+        if (navItems[linkId] === 'homePage') {
+          window.location.href = 'https://bambitp.github.io/GLTP/';
+          return;
+        }
+        if (navItems[linkId] === 'season1Page') {
+          window.location.href = 'https://lfg-beastcode.github.io/gltpdev/GLTPS1/GLTPS1.html';
+          return;
+        }
         // Hide all pages
         Object.values(navItems).forEach(pageId => {
           document.getElementById(pageId).classList.remove('active');

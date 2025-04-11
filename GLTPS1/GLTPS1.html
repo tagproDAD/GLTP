@@ -46,7 +46,8 @@
 
   <div class="top-bar">
     <div class="nav">
-      <a id="rostersLink" class="active">GLTP Rosters</a>
+      <a id="homeLink" class="active">Home</a>
+      <a id="rostersLink" class="active">Rosters</a>
       <a id="linksLink">Info Links</a>
       <a id="week1Link">Week 1</a>
       <a id="week2Link">Week 2</a>
@@ -76,6 +77,7 @@
 
   <script>
     const navItems = {
+      homeLink: 'homePage',
       rostersLink: 'rostersPage',
       linksLink: 'linksPage',
       week1Link: 'week1Page',
@@ -85,6 +87,10 @@
 
     Object.keys(navItems).forEach(linkId => {
       document.getElementById(linkId).addEventListener('click', () => {
+        if (navItems[linkId] === 'homePage') {
+          window.location.href = 'https://bambitp.github.io/GLTP/';
+          return;
+        }
         // Hide all pages
         Object.values(navItems).forEach(pageId => {
           document.getElementById(pageId).classList.remove('active');
