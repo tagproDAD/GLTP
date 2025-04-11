@@ -57,8 +57,7 @@
   </div>
 
   <div id="linksPage" class="page-container">
-    <h2>Common Links</h2>
-    <p>Add shared links here (e.g. TagPro groups, rules, discord, etc).</p>
+    <div id="linksContent">Loading links...</div>
   </div>
 
   <div id="week1Page" class="page-container">
@@ -115,7 +114,34 @@ fetch('S1W1.html')
   })
   .catch(err => {
     document.getElementById('week1Content').innerHTML = "Failed to load roster.";
-    console.error("Error loading roster file:", err);
+    console.error("Error loading week1 file:", err);
+  });
+    fetch('S1W2.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('week2Content').innerHTML = html;
+  })
+  .catch(err => {
+    document.getElementById('week2Content').innerHTML = "Failed to load roster.";
+    console.error("Error loading week2 file:", err);
+  });
+    fetch('S1W3.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('week3Content').innerHTML = html;
+  })
+  .catch(err => {
+    document.getElementById('week3Content').innerHTML = "Failed to load roster.";
+    console.error("Error loading week3 file:", err);
+  });
+    fetch('gltp_links.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('linksContent').innerHTML = html;
+  })
+  .catch(err => {
+    document.getElementById('linksContent').innerHTML = "Failed to load roster.";
+    console.error("Error loading links file:", err);
   });
   </script>
 </body>
