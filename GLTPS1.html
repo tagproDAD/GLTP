@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GLTP</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    .top-bar {
+      background-color: #222;
+      padding: 10px 20px;
+      display: flex;
+    }
+
+    .nav a {
+      color: white;
+      margin-right: 20px;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+
+    .nav a.active {
+      background-color: #2a7dd2;
+    }
+
+    .page-container {
+      display: none;
+      padding: 20px;
+    }
+
+    .page-container.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="nav">
+      <a id="rostersLink" class="active">GLTP Rosters</a>
+      <a id="linksLink">Common Links</a>
+      <a id="week1Link">Week 1</a>
+      <a id="week2Link">Week 2</a>
+      <a id="week3Link">Week 3</a>
+    </div>
+  </div>
+
+   <div id="rostersPage" class="page-container active">
+    <div id="rosterContent">Loading rosters...</div>
+  </div>
+
+  <div id="linksPage" class="page-container">
+    <h2>Common Links</h2>
+    <p>Add shared links here (e.g. TagPro groups, rules, discord, etc).</p>
+  </div>
+
+  <div id="week1Page" class="page-container">
+    <h2>Week 1</h2>
+    <p>Info for Week 1 (maps, results, links, etc).</p>
+  </div>
+
+  <div id="week2Page" class="page-container">
+    <h2>Week 2</h2>
+    <p>Info for Week 2.</p>
+  </div>
+
+  <div id="week3Page" class="page-container">
+    <h2>Week 3</h2>
+    <p>Info for Week 3.</p>
+  </div>
+
+  <script>
+    const navItems = {
+      rostersLink: 'rostersPage',
+      linksLink: 'linksPage',
+      week1Link: 'week1Page',
+      week2Link: 'week2Page',
+      week3Link: 'week3Page'
+    };
+
+    Object.keys(navItems).forEach(linkId => {
+      document.getElementById(linkId).addEventListener('click', () => {
+        // Hide all pages
+        Object.values(navItems).forEach(pageId => {
+          document.getElementById(pageId).classList.remove('active');
+        });
+
+        // Remove active from all links
+        Object.keys(navItems).forEach(id => {
+          document.getElementById(id).classList.remove('active');
+        });
+
+        // Show selected page
+        document.getElementById(navItems[linkId]).classList.add('active');
+        document.getElementById(linkId).classList.add('active');
+      });
+    });
+fetch('gltpRosters.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('rosterContent').innerHTML = html;
+  })
+  .catch(err => {
+    document.getElementById('rosterContent').innerHTML = "Failed to load roster.";
+    console.error("Error loading roster file:", err);
+  });
+  </script>
+
+</body>
+</html>
