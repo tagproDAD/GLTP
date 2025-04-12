@@ -137,3 +137,7 @@ th {
     cursor: pointer;
     background-color: #9898c0;
   }
+
+.arrow {
+  color: #1e90ff;
+}
