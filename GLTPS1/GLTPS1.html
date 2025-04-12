@@ -42,7 +42,7 @@
   <div id="week3Page" class="page-container">
     <div id="week3Content">Loading week 3...</div>
   </div>
-  
+
   <div id="standingsPage" class="page-container active">
     <div id="standingsContent">Loading standings...</div>
   </div>
@@ -124,10 +124,24 @@ fetch('S1W1.html')
     document.getElementById('linksContent').innerHTML = "Failed to load roster.";
     console.error("Error loading links file:", err);
   });
+  function enableToggleListeners() {
+    document.querySelectorAll('.toggle-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const targetId = header.getAttribute('data-toggle-target');
+        const target = document.getElementById(targetId);
+        if (target) {
+          const isHidden = target.style.display === 'none' || getComputedStyle(target).display === 'none';
+          target.style.display = isHidden ? 'block' : 'none';
+        }
+      });
+    });
+  }
+  
   fetch('standings.html')
     .then(res => res.text())
     .then(html => {
       document.getElementById('standingsContent').innerHTML = html;
+      enableToggleListeners(); // <-- important: run *after* content loads
     })
     .catch(err => {
       document.getElementById('standingsContent').innerHTML = "Failed to load standings.";

@@ -111,18 +111,5 @@
     </tbody>
   </table
   </div>
-
-<script>
-  document.querySelectorAll('.toggle-header').forEach(header => {
-    header.addEventListener('click', () => {
-      const targetId = header.getAttribute('data-toggle-target');
-      const target = document.getElementById(targetId);
-      if (target) {
-        const isHidden = target.style.display === 'none' || getComputedStyle(target).display === 'none';
-        target.style.display = isHidden ? 'block' : 'none';
-      }
-    });
-  });
-</script>
 </body>
 </html>
