@@ -46,14 +46,22 @@ body {
 
 h1 {
   left: 0 !important;
+  color: #e3e3e3 !important;
 }
 
 h3 {
-  color: #e3e3e3;
+  color: #e3e3e3 !important;
 }
 
 #message {
-    color: #e3e3e3;
+    color: #e3e3e3 !important;
+    font-size: 24px;
+    font-weight: 500;
+}
+.message {
+  color: #e3e3e3 !important;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .page-container {
