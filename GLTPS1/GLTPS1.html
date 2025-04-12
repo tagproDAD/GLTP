@@ -125,18 +125,24 @@ fetch('S1W1.html')
     console.error("Error loading links file:", err);
   });
   function enableToggleListeners() {
-    document.querySelectorAll('.toggle-header').forEach(header => {
-      header.addEventListener('click', () => {
-        const targetId = header.getAttribute('data-toggle-target');
-        const target = document.getElementById(targetId);
-        if (target) {
-          const isHidden = target.style.display === 'none' || getComputedStyle(target).display === 'none';
-          target.style.display = isHidden ? 'block' : 'none';
+  document.querySelectorAll('.toggle-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const targetId = header.getAttribute('data-toggle-target');
+      const target = document.getElementById(targetId);
+      const arrow = header.querySelector('.arrow');
+
+      if (target) {
+        const isHidden = target.style.display === 'none' || getComputedStyle(target).display === 'none';
+        target.style.display = isHidden ? 'block' : 'none';
+
+        if (arrow) {
+          arrow.textContent = isHidden ? '▼' : '▶';
         }
-      });
+      }
     });
-  }
-  
+  });
+}
+
   fetch('standings.html')
     .then(res => res.text())
     .then(html => {
