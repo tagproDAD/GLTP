@@ -1,7 +1,7 @@
 /* Dark mode global styles */
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
+  margin: 0 !important;
   padding: 0;
   box-sizing: border-box;
   background-color: #121212;
@@ -46,20 +46,20 @@ body {
 
 h1 {
   left: 0 !important;
-  color: #e3e3e3 !important;
+  color: #e0e0e0 !important;
 }
 
 h3 {
-  color: #e3e3e3 !important;
+  color: #e0e0e0 !important;
 }
 
 #message {
-    color: #e3e3e3 !important;
+    color: #e0e0e0 !important;
     font-size: 24px;
     font-weight: 500;
 }
 .message {
-  color: #e3e3e3 !important;
+  color: #e0e0e0 !important;
   font-size: 24px;
   font-weight: 500;
 }
@@ -104,19 +104,19 @@ table {
   text-align: center;
 }
 th, td {
-  border: 1px solid #555;
+  border: 1px solid #555 !important;
   padding: 8px;
 }
 td {
   text-align: left;
-  color: white;
+  color: #e0e0e0;
 }
 th {
   background-color: #e3e3e3;
 }
 .title {
   background-color: #2a7dd2;
-  color: white;
+  color: #e0e0e0;
   font-size: 24px;
   font-weight: bold;
 }
