@@ -124,6 +124,7 @@ fetch('S1W1.html')
     document.getElementById('linksContent').innerHTML = "Failed to load roster.";
     console.error("Error loading links file:", err);
   });
+  
   function enableToggleListeners() {
   document.querySelectorAll('.toggle-header').forEach(header => {
     header.addEventListener('click', () => {
