@@ -76,7 +76,10 @@
 
 
 
-  <h2>FWO Points</h2>
+  <h2 onclick="toggleSection('fwo-points-table')" style="cursor: pointer; color: #007bff;">
+    ▶ FWO Points
+  </h2>
+  <div id="fwo-points-table" style="display: none;">
   <table>
     <thead>
       <tr>
@@ -112,4 +115,11 @@
   </table>
 
 </body>
+
+<script>
+  function toggleSection(id) {
+    const section = document.getElementById(id);
+    section.style.display = section.style.display === "none" ? "block" : "none";
+  }
+</script>
 </html>
