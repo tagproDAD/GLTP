@@ -10,11 +10,12 @@
   <div class="top-bar">
     <div class="nav">
       <a id="homeLink">Home</a>
-      <a id="rostersLink" class="active">Rosters</a>
+      <a id="standingsLink" class="active">Standings</a>
       <a id="linksLink">Info Links</a>
       <a id="week1Link">Week 1</a>
       <a id="week2Link">Week 2</a>
       <a id="week3Link">Week 3</a>
+      <a id="rostersLink">Rosters</a>
       <a id="season1Link">Season 1</a>
     </div>
   </div>
@@ -47,6 +48,10 @@
     <div id="week3Content">Loading week 3...</div>
   </div>
 
+  <div id="standingsPage" class="page-container active">
+    <div id="standingsContent">Loading standings...</div>
+  </div>
+
   <script>
     const navItems = {
       homeLink: 'homePage',
@@ -55,7 +60,8 @@
       week1Link: 'week1Page',
       week2Link: 'week2Page',
       week3Link: 'week3Page',
-      season1Link: 'season1Page'
+      season1Link: 'season1Page',
+      standingsLink: 'standingsPage'
     };
 
     Object.keys(navItems).forEach(linkId => {
@@ -129,6 +135,35 @@ fetch('S2W1.html')
     document.getElementById('linksContent').innerHTML = "Failed to load roster.";
     console.error("Error loading links file:", err);
   });
+  function enableToggleListeners() {
+  document.querySelectorAll('.toggle-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const targetId = header.getAttribute('data-toggle-target');
+      const target = document.getElementById(targetId);
+      const arrow = header.querySelector('.arrow');
+
+      if (target) {
+        const isHidden = target.style.display === 'none' || getComputedStyle(target).display === 'none';
+        target.style.display = isHidden ? 'block' : 'none';
+
+        if (arrow) {
+          arrow.textContent = isHidden ? '▼' : '▶';
+        }
+      }
+    });
+  });
+}
+
+  fetch('standings.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('standingsContent').innerHTML = html;
+      enableToggleListeners(); // <-- important: run *after* content loads
+    })
+    .catch(err => {
+      document.getElementById('standingsContent').innerHTML = "Failed to load standings.";
+      console.error("Error loading standings file:", err);
+    });
   </script>
 </body>
 </html>
