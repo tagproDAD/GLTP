@@ -650,7 +650,7 @@
             launchButton.classList.add("copy-button");
             launchButton.addEventListener('click', (event) => {
               event.stopPropagation();
-              if (presetValue !== "N/A")
+              if (presetValue !== "N/A") {
                 launchTagproGroup(presetValue);
               }
             });
