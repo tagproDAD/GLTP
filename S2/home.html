@@ -58,43 +58,36 @@
   </div>
 
   <script>
-    const navItems = {
-      homeLink: 'homePage',
-      rostersLink: 'rostersPage',
-      linksLink: 'linksPage',
-      week1Link: 'week1Page',
-      week2Link: 'week2Page',
-      week3Link: 'week3Page',
-      season1Link: 'season1Page',
-      standingsLink: 'standingsPage'
-    };
+  const navItems = {
+    home: { linkId: 'homeLink', pageId: 'homePage' },
+    standings: { linkId: 'standingsLink', pageId: 'standingsPage' },
+    links: { linkId: 'linksLink', pageId: 'linksPage' },
+    week1: { linkId: 'week1Link', pageId: 'week1Page' },
+    week2: { linkId: 'week2Link', pageId: 'week2Page' },
+    week3: { linkId: 'week3Link', pageId: 'week3Page' },
+    rosters: { linkId: 'rostersLink', pageId: 'rostersPage' },
+    season1: { linkId: 'season1Link', pageId: 'season1Page' }, // special case
+  };
 
-    Object.keys(navItems).forEach(linkId => {
-      document.getElementById(linkId).addEventListener('click', () => {
-        // Handle the special case
-        if (navItems[linkId] === 'homePage') {
-          window.location.href = '/GLTP/';
-          return;
-        }
-        if (navItems[linkId] === 'season1Page') {
-          window.location.href = '/GLTP/S1/home.html';
-          return;
-        }
-        // Hide all pages
-        Object.values(navItems).forEach(pageId => {
-          document.getElementById(pageId).classList.remove('active');
-        });
+  Object.entries(navItems).forEach(([key, { linkId, pageId }]) => {
+    document.getElementById(linkId).addEventListener('click', () => {
+      // Handle special redirect cases
+      if (key === 'home') {
+        window.location.href = '/GLTP/';
+        return;
+      }
+      if (key === 'season1') {
+        window.location.href = '/GLTP/S1/home.html';
+        return;
+      }
 
-        // Remove active from all links
-        Object.keys(navItems).forEach(id => {
-          document.getElementById(id).classList.remove('active');
-        });
+      // Update the hash
+      window.location.hash = key;
 
-        // Show selected page
-        document.getElementById(navItems[linkId]).classList.add('active');
-        document.getElementById(linkId).classList.add('active');
-      });
+      // Show the correct page
+      showPage(pageId, linkId);
     });
+  });
 fetch('gltpRosters.html')
   .then(res => res.text())
   .then(html => {
@@ -235,6 +228,33 @@ fetch('S2W1.html')
       }
     }
   });
+  window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.slice(1); // e.g. "week1"
+    if (navItems[hash]) {
+      const { pageId, linkId } = navItems[hash];
+      showPage(pageId, linkId);
+    } else {
+      // Default to standings
+      const { pageId, linkId } = navItems['standings'];
+      showPage(pageId, linkId);
+    }
+  });
+  function showPage(pageId, linkId) {
+  // Hide all pages
+    Object.values(navItems).forEach(id => {
+      document.getElementById(id).classList.remove('active');
+    });
+
+    // Remove active class from all links
+    Object.keys(navItems).forEach(id => {
+      document.getElementById(id).classList.remove('active');
+    });
+
+    // Show the selected page and link
+    document.getElementById(pageId).classList.add('active');
+    document.getElementById(linkId).classList.add('active');
+  }
+
   </script>
 </body>
 </html>
