@@ -240,19 +240,28 @@ fetch('S2W1.html')
     }
   });
   function showPage(pageId, linkId) {
-  // Hide all pages
-    Object.values(navItems).forEach(id => {
-      document.getElementById(id).classList.remove('active');
+    // Hide all pages
+    Object.values(navItems).forEach(({ pageId }) => {
+      const page = document.getElementById(pageId);
+      if (page) {
+        page.classList.remove('active');
+      }
     });
 
     // Remove active class from all links
-    Object.keys(navItems).forEach(id => {
-      document.getElementById(id).classList.remove('active');
+    Object.values(navItems).forEach(({ linkId }) => {
+      const link = document.getElementById(linkId);
+      if (link) {
+        link.classList.remove('active');
+      }
     });
 
     // Show the selected page and link
-    document.getElementById(pageId).classList.add('active');
-    document.getElementById(linkId).classList.add('active');
+    const page = document.getElementById(pageId);
+    const link = document.getElementById(linkId);
+
+    if (page) page.classList.add('active');
+    if (link) link.classList.add('active');
   }
 
   </script>
