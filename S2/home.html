@@ -142,11 +142,11 @@ fetch('S2W1.html')
   fetch('ofm.html')
   .then(res => res.text())
   .then(html => {
-    document.getElementById('linksContent').innerHTML = html;
+    document.getElementById('ofmContent').innerHTML = html;
   })
   .catch(err => {
-    document.getElementById('linksContent').innerHTML = "Failed to load roster.";
-    console.error("Error loading links file:", err);
+    document.getElementById('ofmContent').innerHTML = "Failed to load ofm.";
+    console.error("Error loading ofm file:", err);
   });
   function enableToggleListeners() {
   document.querySelectorAll('.toggle-header').forEach(header => {
