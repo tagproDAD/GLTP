@@ -23,6 +23,7 @@ body {
 
 .nav {
   display: flex;
+  align-items: center; /* ensures vertical centering */
   gap: 20px;
 }
 
@@ -144,7 +145,8 @@ th {
 
 .dropdown {
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
 }
 
 .dropbtn {
