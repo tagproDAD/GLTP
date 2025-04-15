@@ -198,6 +198,7 @@ th {
   margin: 0;
   padding-left: 20px;
   list-style-type: disc !important;
+  text-align: left !important;
 }
 
 .rulepair li {
