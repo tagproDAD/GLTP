@@ -181,15 +181,34 @@ th {
   display: block;
 }
 
-.ruleblock {
-  max-width: 600px;
-  margin: 0 auto; /* centers the block */
-  text-align: left; /* makes sure text is aligned left */
-}
-
 .rulescontainer {
-  margin: 20px 0;
+  background-color: #3e5c7e;
   padding: 15px;
   border-radius: 8px;
-  background-color: #3e5c7e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rulepair {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.rulepair h4 {
+  min-width: 200px;
+  margin: 0;
+  text-align: left;
+}
+
+.rulepair ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.rulepair li {
+  margin-bottom: 6px;
 }
