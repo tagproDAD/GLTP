@@ -180,3 +180,16 @@ th {
 .dropdown-content.show {
   display: block;
 }
+
+.ruleblock {
+  max-width: 600px;
+  margin: 0 auto; /* centers the block */
+  text-align: left; /* makes sure text is aligned left */
+}
+
+.rulescontainer {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #3e5c7e;
+}
