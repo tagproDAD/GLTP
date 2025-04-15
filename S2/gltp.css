@@ -186,29 +186,21 @@ th {
   padding: 15px;
   border-radius: 8px;
   color: white;
-  display: flex;
-  flex-direction: column;
   gap: 20px;
 }
 
-.rulepair {
-  display: flex;
-  align-items: flex-start;
-  gap: 40px;
-}
 
 .rulepair h4 {
-  min-width: 200px;
   margin: 0;
-  text-align: left;
 }
 
 .rulepair ul {
   margin: 0;
   padding-left: 20px;
-  list-style-type: disc;
+  list-style-type: disc !important;
 }
 
 .rulepair li {
-  margin-bottom: 6px;
+  display: list-item !important;
+  margin-bottom: 6px
 }
