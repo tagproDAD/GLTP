@@ -29,9 +29,8 @@ const processDir = (srcPath, outPath) => {
 
         fs.writeFileSync(outHashedPath, content);
 
-        // Save relative mapping
         const relPath = path.relative(SRC_DIR, srcFile).replace(/\\/g, '/');
-        const hashedRelPath = path.relative(SRC_DIR, path.join(outPath, hashedName)).replace(/\\/g, '/');
+        const hashedRelPath = path.relative(SRC_DIR, path.join(srcPath, hashedName)).replace(/\\/g, '/');
         assetMap[relPath] = hashedRelPath;
       } else {
         // Copy other files directly
@@ -51,10 +50,19 @@ processDir(SRC_DIR, OUT_DIR);
 const replaceRefsInHtml = (filePath) => {
   let html = fs.readFileSync(filePath, 'utf-8');
   for (const [orig, hashed] of Object.entries(assetMap)) {
-    html = html.replace(new RegExp(orig, 'g'), hashed);
+    const origFileName = path.basename(orig);  // This gets just the filename (e.g., style.css)
+    const hashedFileName = path.basename(hashed); // This gets the hashed filename (e.g., style.98d2489c.css)
+
+    // Replace the full relative path (like 'src/style.css') with the hashed file path
+    html = html.replace(new RegExp(orig.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), hashed);
+
+    // Replace just the filename in URLs or <link> tags (like 'style.css' -> 'style.98d2489c.css')
+    html = html.replace(new RegExp(origFileName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), hashedFileName);
   }
+
   fs.writeFileSync(filePath, html);
 };
+
 
 const walkAndProcessHtml = (dir) => {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
