@@ -1,0 +1,126 @@
+{
+  "week1": [
+    {
+      "mapName": "Tunnel racer",
+      "author": "9bob9",
+      "link": "https://fortunatemaps.herokuapp.com/map/36193",
+      "recommendedBalls": "1+",
+      "preset": "gZMefnubggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefnubggtkiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant\n3 laps",
+      "points": 1,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Easy",
+      "speedruns": [
+        {
+          "rank": 1,
+          "time": "2:30.775",
+          "players": ["Some Ball 64"],
+          "team": "Fall Bondlers",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=e3cd344d-382b-4fcc-81cc-0f1496682edf",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "mapName": "2 Person Buddy' v2 (Official FWO)",
+      "author": "Splittin'",
+      "link": "https://fortunatemaps.herokuapp.com/map/87826",
+      "recommendedBalls": "2+",
+      "preset": "gZMefGyYggtaiaaaJraaksaaamaaaE",
+      "speedrunPreset": "gZMefGyYggtaiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 1,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Easy",
+      "speedruns": [
+        {
+          "rank": 1,
+          "time": "1:53.986",
+          "players": ["Some Ball 64", "Billy", "Ball Of Fame"],
+          "team": "Fall Bondlers",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=a9dac72b-3c48-423f-9e86-6e7b848640d7",
+          "points": 2
+        },
+        {
+          "rank": 2,
+          "time": "3:30.221",
+          "players": ["Beach", "DAD."],
+          "team": "FWO",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=c202a904-8757-43ee-b07b-93dfa03eb054",
+          "points": 1
+        }
+      ]
+    },
+    {
+      "mapName": "Mars Climb Part II",
+      "author": "Ball-E & FWO",
+      "link": "https://fortunatemaps.herokuapp.com/map/86703",
+      "recommendedBalls": "1+",
+      "preset": "gZMefGdtggtuiaaaJyaraaksaaamaaaYE",
+      "speedrunPreset": "gZMefGdtggtkiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 2,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Easy",
+      "speedruns": [
+        {
+          "rank": 1,
+          "time": "40.861",
+          "players": ["Some Ball 64"],
+          "team": "Fall Bondlers",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=cbad6bac-3a41-4811-b24a-3eb50cc0453f",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "mapName": "Hopscotch (Official FWO)",
+      "author": "Carey Price",
+      "link": "https://fortunatemaps.herokuapp.com/map/88703",
+      "recommendedBalls": "1+",
+      "preset": "gZMefGPRggtaiaaaJyaraaksaaamaaapaE",
+      "speedrunPreset": "gZMefGPRggtkcbiaaaJybraaasaaamaaaYpaEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant\nunlimited jumps",
+      "points": 2,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": []
+    },
+    {
+      "mapName": "Buddy System 8 (TM1 Version) 9bob9",
+      "author": "Team 1",
+      "link": "https://fortunatemaps.herokuapp.com/map/47885",
+      "recommendedBalls": "3+",
+      "preset": "gZMefrKTggtaiaaaJraaksaaaE",
+      "speedrunPreset": "gZMefrKTggtkcbiaaaJybraaasaaaYEG",
+      "settings": "Bomb Respawn: Default\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+        {
+          "rank": 1,
+          "time": "7:41.259",
+          "players": ["Some Ball 64", "Billy", "Ball Of Fame", "perl"],
+          "team": "Fall Bondlers",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=3f0fb6ad-a786-467c-ac3d-6db919eb88f2",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "mapName": "AUSSIE Teambuilding 3 v1.1 [GLTP]",
+      "author": "leddy & FWO",
+      "link": "https://fortunatemaps.herokuapp.com/map/89979",
+      "recommendedBalls": "3+",
+      "preset": "gZMefHotggtaiaaaJraaksaaamabWE",
+      "speedrunPreset": "gZMefHotggtaiaaaJyaraaasaaamabWYEG",
+      "settings": "Bomb Respawn: 10 Sec\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": []
+    }
+  ]
+}
