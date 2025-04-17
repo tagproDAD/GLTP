@@ -165,4 +165,20 @@ window.addEventListener("click", function (e) {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash.slice(1
+  const hash = window.location.hash.slice(1);
+  if (navItems[hash]) {
+    const { pageId, linkId } = navItems[hash];
+    showPage(pageId, linkId);
+  } else {
+    const { pageId, linkId } = navItems['standings'];
+    showPage(pageId, linkId);
+  }
+
+  loadPageContent('gltpRosters.html', 'rosterContent');
+  loadPageContent('S2W1.html', 'week1Content');
+  loadPageContent('S2W2.html', 'week2Content');
+  loadPageContent('S2W3.html', 'week3Content');
+  loadPageContent('gltp_links.html', 'linksContent');
+  loadPageContent('ofm.html', 'ofmContent');
+  loadPageContent('standings.html', 'standingsContent');
+});
