@@ -96,60 +96,27 @@
       showPage(pageId, linkId);
     });
   });
-fetch('gltpRosters.html?v=${window.BUILD_VERSION}')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('rosterContent').innerHTML = html;
-  })
-  .catch(err => {
-    document.getElementById('rosterContent').innerHTML = "Failed to load roster.";
-    console.error("Error loading week1 file:", err);
-  });
-fetch('S2W1.html?v=${window.BUILD_VERSION}')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('week1Content').innerHTML = html;
-  })
-  .catch(err => {
-    document.getElementById('week1Content').innerHTML = "Failed to load roster.";
-    console.error("Error loading week1 file:", err);
-  });
-    fetch('S2W2.html?v=${window.BUILD_VERSION}')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('week2Content').innerHTML = html;
-  })
-  .catch(err => {
-    document.getElementById('week2Content').innerHTML = "Failed to load roster.";
-    console.error("Error loading week2 file:", err);
-  });
-    fetch('S2W3.html?v=${window.BUILD_VERSION}')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('week3Content').innerHTML = html;
-  })
-  .catch(err => {
-    document.getElementById('week3Content').innerHTML = "Failed to load roster.";
-    console.error("Error loading week3 file:", err);
-  });
-    fetch('gltp_links.html?v=${window.BUILD_VERSION}')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('linksContent').innerHTML = html;
-  })
-  .catch(err => {
-    document.getElementById('linksContent').innerHTML = "Failed to load roster.";
-    console.error("Error loading links file:", err);
-  });
-  fetch('ofm.html?v=${window.BUILD_VERSION}')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('ofmContent').innerHTML = html;
-  })
-  .catch(err => {
-    document.getElementById('ofmContent').innerHTML = "Failed to load ofm.";
-    console.error("Error loading ofm file:", err);
-  });
+
+  function loadPageContent(filename, elementId) {
+  fetch(`${filename}?v=${window.BUILD_VERSION}`)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById(elementId).innerHTML = html;
+      if (filename === 'standings.html') enableToggleListeners();
+    })
+    .catch(err => {
+      document.getElementById(elementId).innerHTML = `Failed to load ${filename}.`;
+      console.error(`Error loading ${filename}:`, err);
+    });
+}
+
+loadPageContent('gltpRosters.html', 'rosterContent');
+loadPageContent('S2W1.html', 'week1Content');
+loadPageContent('S2W2.html', 'week2Content');
+loadPageContent('S2W3.html', 'week3Content');
+loadPageContent('gltp_links.html', 'linksContent');
+loadPageContent('ofm.html', 'ofmContent');
+
   function enableToggleListeners() {
   document.querySelectorAll('.toggle-header').forEach(header => {
     header.addEventListener('click', () => {
@@ -169,16 +136,7 @@ fetch('S2W1.html?v=${window.BUILD_VERSION}')
   });
 }
 
-fetch('standings.html?v=${window.BUILD_VERSION}')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('standingsContent').innerHTML = html;
-      enableToggleListeners(); // <-- important: run *after* content loads
-    })
-    .catch(err => {
-      document.getElementById('standingsContent').innerHTML = "Failed to load standings.";
-      console.error("Error loading standings file:", err);
-    });
+  loadPageContent('standings.html', 'standingsContent');
 
     function copyMapID(button) {
     const span = button.parentElement.querySelector('.map-id');
@@ -196,6 +154,7 @@ fetch('standings.html?v=${window.BUILD_VERSION}')
         .catch(err => console.error("Error copying map :", err));
     }
   }
+
 
   function openMap(button) {
     const span = button.parentElement.querySelector('.map-id');
