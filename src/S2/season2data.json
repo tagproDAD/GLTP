@@ -122,5 +122,71 @@
       "difficulty": "Medium",
       "speedruns": []
     }
+  ],
+  "teams": [
+    {
+      "name": "FWO",
+      "points": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "roster": [
+        "DAD", "Madoka", "Carrrrrl", "DrCristinaYang", "TeaForYou&Me",
+        "MarcusYallow", "Beach", "the buttons"
+      ]
+    },
+    {
+      "name": "Fall Bondlers",
+      "points": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "roster": [
+        "SB ARMY SB", "Bashella", "LogisticMap", "timo_tay", "Billy",
+        "perl", "Bambi", "Ball Of Fame", "hmmmm"
+      ]
+    },
+    {
+      "name": "Teletubbies",
+      "points": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "roster": [
+        "elfitzo", "Bobbay", "itag", "Vexation"
+      ]
+    },
+    {
+      "name": "Honkeys",
+      "points": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "roster": [
+        "burt", "Honky", "Troglodyte", "HappyCracker",
+        "L1GMa", "PoonLuvr69", "+1"
+      ]
+    },
+    {
+      "name": "West Coast",
+      "points": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "roster": [
+        "MRCOW", "EpicBlob", "EvTheSmev", "bleast",
+        "Valerian", "Tinderfella"
+      ]
+    },
+    {
+      "name": "Momentum Mori",
+      "points": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "roster": [
+        "BigBird"
+      ]
+    }
   ]
 }
