@@ -76,6 +76,10 @@ const walkAndProcessHtml = (dir) => {
   }
 };
 
+// Generate a build version (you could also hash all files for real versioning)
+const buildVersion = Date.now().toString();
+fs.writeFileSync(path.join(OUT_DIR, 'build-version.js'), `window.BUILD_VERSION = "${buildVersion}";`);
+
 walkAndProcessHtml(OUT_DIR);
 
 console.log('✅ Build complete. Files cache-busted and copied to docs/');
