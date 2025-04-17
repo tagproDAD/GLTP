@@ -196,6 +196,12 @@ function medal(rank) {
 }
 
 function generatePage(data) {
+  if (window.location.hash === '#week1') {
+    const week1Content = document.getElementById('week1Content');
+    if (week1Content) {
+      week1Content.innerHTML = generateWeek1Content(data.week1);
+    }
+  }
   const container = document.getElementById("content");
 
   container.innerHTML = `<h1>${data.title}</h1>`;
@@ -247,4 +253,53 @@ function generatePage(data) {
   });
 
   container.appendChild(mapTable);
+}
+
+function generateWeek1Content(week1Data) {
+  let html = `
+    <table style="width: 100%; table-layout: fixed;">
+      <colgroup>
+        <col style="width: 15%;">
+        <col style="width: 23%;">
+        <col style="width: 25%;">
+        <col style="width: 15%;">
+        <col style="width: 5%;">
+        <col style="width: 9%;">
+        <col style="width: 8%;">
+      </colgroup>
+      <tr>
+        <th>Map</th>
+        <th>Group Preset</th>
+        <th>Speedrun Group Preset</th>
+        <th>Settings</th>
+        <th>Points</th>
+        <th>Points for Fastest Time</th>
+        <th>Difficulty <br> Rank</th>
+      </tr>
+  `;
+
+  week1Data.forEach(map => {
+    html += `
+      <tr>
+        <td><a href="${map.link}" target="_blank">${map.mapName} <br> by ${map.author}</a> <br><br> ${map.recommendedBalls} balls recommended</td>
+        <td>
+          <span class="map-id">${map.preset}</span> <br> <br>
+          <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
+          <button class="open-button" onclick="openMap(this)">Launch Group</button>
+        </td>
+        <td>
+          <span class="map-id">${map.speedrunPreset}</span> <br> <br>
+          <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
+          <button class="open-button" onclick="openMap(this)">Launch Group</button>
+        </td>
+        <td>${map.settings}</td>
+        <td>${map.points}</td>
+        <td>${map.fastestPoints}</td>
+        <td>${map.difficulty}</td>
+      </tr>
+    `;
+  });
+
+  html += `</table>`;
+  return html;
 }
