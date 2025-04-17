@@ -129,7 +129,7 @@ function renderWeekContent(containerId, weekData) {
       <th>Speedrun Group Preset</th>
       <th>Settings</th>
       <th>Points</th>
-      <th>Points for Fastest Time</th>
+      <th>Fastest Time <br> points</th>
       <th>Difficulty <br> Rank</th>
     </tr>
   `;
@@ -317,6 +317,7 @@ function teamSpeedrunRank(teamName, map) {
   if (!map.speedruns) return null;
 
   const teamRun = map.speedruns.find(run => run.team === teamName);
+  if (!teamRun || teamRun.includeOnSpeedrun !== "yes") return null;
   return teamRun ? teamRun.rank : null;
 }
 
