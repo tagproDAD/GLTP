@@ -59,7 +59,7 @@ function loadPageContent(filename, elementId) {
 }
 
 function fetchStandingsData() {
-  fetch(`season2Data.json?v=${window.BUILD_VERSION}`)
+  fetch(`season2data.json?v=${window.BUILD_VERSION}`)
     .then(res => res.json())
     .then(data => renderStandings(data))
     .catch(err => console.error("Error loading season2Data.json:", err));
@@ -181,4 +181,5 @@ window.addEventListener('DOMContentLoaded', () => {
   loadPageContent('gltp_links.html', 'linksContent');
   loadPageContent('ofm.html', 'ofmContent');
   loadPageContent('standings.html', 'standingsContent');
+
 });
