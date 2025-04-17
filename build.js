@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const SRC_DIR = 'src';
 const OUT_DIR = 'docs';
 const assetMap = {};
+const buildVersion = Date.now().toString(); // Generate build version up front
 
 // Recursive copy + hash processor
 const processDir = (srcPath, outPath) => {
@@ -49,20 +50,20 @@ processDir(SRC_DIR, OUT_DIR);
 // Update HTML files
 const replaceRefsInHtml = (filePath) => {
   let html = fs.readFileSync(filePath, 'utf-8');
+
+  // Inject inline build version
+  html = html.replace(/{{BUILD_VERSION}}/g, buildVersion);
+
   for (const [orig, hashed] of Object.entries(assetMap)) {
-    const origFileName = path.basename(orig);  // This gets just the filename (e.g., style.css)
-    const hashedFileName = path.basename(hashed); // This gets the hashed filename (e.g., style.98d2489c.css)
+    const origFileName = path.basename(orig);
+    const hashedFileName = path.basename(hashed);
 
-    // Replace the full relative path (like 'src/style.css') with the hashed file path
     html = html.replace(new RegExp(orig.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), hashed);
-
-    // Replace just the filename in URLs or <link> tags (like 'style.css' -> 'style.98d2489c.css')
     html = html.replace(new RegExp(origFileName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), hashedFileName);
   }
 
   fs.writeFileSync(filePath, html);
 };
-
 
 const walkAndProcessHtml = (dir) => {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -75,10 +76,6 @@ const walkAndProcessHtml = (dir) => {
     }
   }
 };
-
-// Generate a build version (you could also hash all files for real versioning)
-const buildVersion = Date.now().toString();
-fs.writeFileSync(path.join(OUT_DIR, 'build-version.js'), `window.BUILD_VERSION = "${buildVersion}";`);
 
 walkAndProcessHtml(OUT_DIR);
 
