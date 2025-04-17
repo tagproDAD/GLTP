@@ -3,7 +3,7 @@ const navItems = {
   home: { linkId: 'homeLink', pageId: 'homePage' },
   standings: { linkId: 'standingsLink', pageId: 'standingsPage' },
   ofm: { linkId: 'ofmLink', pageId: 'ofmPage' },
-  info: { linkId: 'linksLink', pageId: 'linksPage' },
+  links: { linkId: 'linksLink', pageId: 'linksPage' },
   week1: { linkId: 'week1Link', pageId: 'week1Page' },
   week2: { linkId: 'week2Link', pageId: 'week2Page' },
   week3: { linkId: 'week3Link', pageId: 'week3Page' },
@@ -57,12 +57,32 @@ function fetchSeasonData() {
     .then(data => {
       seasonData = data;
 
-      // Render content for each page
-      renderWeekContent('week1Content', data.week1);
-      // When week2 and week3 data is added to JSON:
-      // renderWeekContent('week2Content', data.week2);
-      // renderWeekContent('week3Content', data.week3);
+      // Render content for each page based on JSON data
+      loadPageContent('homeContent', data.pages?.home?.content || "Home content not found.");
+      loadPageContent('ofmContent', data.pages?.ofm?.content || "OFM content not found.");
+      loadPageContent('linksContent', data.pages?.links?.content || "Links content not found.");
+      loadPageContent('season1Content', data.pages?.season1?.content || "Season 1 content not found.");
 
+      // Handle week content - check if data exists first
+      if (data.week1 && data.week1.length > 0) {
+        renderWeekContent('week1Content', data.week1);
+      } else {
+        loadPageContent('week1Content', "Week 1 content not yet available.");
+      }
+
+      if (data.week2 && data.week2.length > 0) {
+        renderWeekContent('week2Content', data.week2);
+      } else {
+        loadPageContent('week2Content', "Week 2 content not yet available.");
+      }
+
+      if (data.week3 && data.week3.length > 0) {
+        renderWeekContent('week3Content', data.week3);
+      } else {
+        loadPageContent('week3Content', "Week 3 content not yet available.");
+      }
+
+      // Render standings and rosters
       renderStandings('standingsContent', data.teams);
       renderRosters('rosterContent', data.teams);
 
@@ -75,12 +95,21 @@ function fetchSeasonData() {
     });
 }
 
+// Helper function to load simple page content
+function loadPageContent(containerId, content) {
+  const container = document.getElementById(containerId);
+  if (container) {
+    container.innerHTML = content;
+  }
+}
+
 // Render weekly content (maps and speedruns)
 function renderWeekContent(containerId, weekData) {
   const container = document.getElementById(containerId);
   if (!container || !weekData) return;
 
-  let html = `<h1>GLTP Season 2 Week ${containerId.replace('week', '').replace('Content', '')} Maps</h1>`;
+  let weekNumber = containerId.replace('week', '').replace('Content', '');
+  let html = `<h1>GLTP Season 2 Week ${weekNumber} Maps</h1>`;
 
   // Create maps table
   html += `
@@ -156,7 +185,7 @@ function renderWeekContent(containerId, weekData) {
           <td>${run.time}</td>
           <td>${Array.isArray(run.players) ? run.players.join('<br>') : run.players}</td>
           <td>${run.team}</td>
-          <td><a href="${run.replay}">Link</a></td>
+          <td><a href="${run.replay}" target="_blank">Link</a></td>
           <td>${run.points}</td>
         </tr>
         `;
@@ -247,11 +276,10 @@ function renderStandings(containerId, teamsData) {
         <tbody>
     `;
 
-    // Will need to adjust this based on actual data structure in your JSON
-    // This is a placeholder - you'll need to connect it to your actual completion and speedrun data
+    // Loop through each week's maps
     if (seasonData && seasonData.week1) {
       seasonData.week1.forEach((map, idx) => {
-        // Check if team completed this map (simple sample logic)
+        // Check if team completed this map (has a speedrun entry)
         const hasCompleted = teamCompletedMap(team.name, map);
         const speedrunRank = teamSpeedrunRank(team.name, map);
 
@@ -279,8 +307,7 @@ function renderStandings(containerId, teamsData) {
 
 // Helper function to check if a team completed a map
 function teamCompletedMap(teamName, map) {
-  // This is a placeholder - implement based on your data structure
-  // Assuming a team completed a map if they have any speedrun entry for it
+  // Check if the team has a speedrun entry for this map
   return map.speedruns && map.speedruns.some(run => run.team === teamName);
 }
 
