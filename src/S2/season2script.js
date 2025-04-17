@@ -58,10 +58,17 @@ function loadPageContent(filename, elementId) {
     });
 }
 
-function fetchStandingsData() {
+// Combined data fetch to handle both page content and standings
+function fetchSeasonData() {
   fetch(`season2data.json?v=${window.BUILD_VERSION}`)
     .then(res => res.json())
-    .then(data => renderStandings(data))
+    .then(data => {
+      // Call generatePage to display all map and season content
+      generatePage(data);
+
+      // Render standings after data is fetched
+      renderStandings(data);
+    })
     .catch(err => console.error("Error loading season2Data.json:", err));
 }
 
@@ -279,13 +286,7 @@ function generatePage(data) {
   });
 }
 
-fetch('season2Data.json')
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.json();
-  })
-  .then(data => generatePage(data))
-  .catch(err => {
-    document.getElementById("content").innerHTML = `<p>Error loading data: ${err}</p>`;
-    console.error(err);
-  });
+// This will be called when the page loads to fetch all data and render content
+document.addEventListener('DOMContentLoaded', () => {
+  fetchSeasonData();
+});
