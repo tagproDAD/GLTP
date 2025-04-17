@@ -1,3 +1,4 @@
+// Define navigation items - keep this structure as it's useful
 const navItems = {
   home: { linkId: 'homeLink', pageId: 'homePage' },
   standings: { linkId: 'standingsLink', pageId: 'standingsPage' },
@@ -10,6 +11,10 @@ const navItems = {
   season1: { linkId: 'season1Link', pageId: 'season1Page' },
 };
 
+// Data storage for all loaded content
+let seasonData = null;
+
+// Set up navigation event listeners
 Object.entries(navItems).forEach(([key, { linkId, pageId }]) => {
   document.getElementById(linkId).addEventListener('click', () => {
     if (key === 'home') {
@@ -25,7 +30,9 @@ Object.entries(navItems).forEach(([key, { linkId, pageId }]) => {
   });
 });
 
+// Show/hide pages and update active state for navigation
 function showPage(pageId, linkId) {
+  // Hide all pages and remove active class from all links
   Object.values(navItems).forEach(({ pageId }) => {
     const page = document.getElementById(pageId);
     if (page) page.classList.remove('active');
@@ -36,64 +43,292 @@ function showPage(pageId, linkId) {
     if (link) link.classList.remove('active');
   });
 
+  // Show selected page and mark link as active
   const page = document.getElementById(pageId);
   const link = document.getElementById(linkId);
   if (page) page.classList.add('active');
   if (link) link.classList.add('active');
 }
 
-function loadPageContent(filename, elementId) {
-  fetch(`${filename}?v=${window.BUILD_VERSION}`)
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById(elementId).innerHTML = html;
-      if (filename === 'standings.html') {
-        enableToggleListeners();
-        //fetchStandingsData();
-      }
-    })
-    .catch(err => {
-      document.getElementById(elementId).innerHTML = `Failed to load ${filename}.`;
-      console.error(`Error loading ${filename}:`, err);
-    });
-}
-
-// Combined data fetch to handle both page content and standings
+// Main function to fetch and parse JSON data
 function fetchSeasonData() {
   fetch(`season2data.json?v=${window.BUILD_VERSION}`)
     .then(res => res.json())
     .then(data => {
-      // Call generatePage to display all map and season content
-      generatePage(data);
+      seasonData = data;
 
-      // Render standings after data is fetched
-      renderStandings(data);
+      // Render content for each page
+      renderWeekContent('week1Content', data.week1);
+      // When week2 and week3 data is added to JSON:
+      // renderWeekContent('week2Content', data.week2);
+      // renderWeekContent('week3Content', data.week3);
+
+      renderStandings('standingsContent', data.teams);
+      renderRosters('rosterContent', data.teams);
+
+      // Add event listeners after content is loaded
+      enableToggleListeners();
     })
-    .catch(err => console.error("Error loading season2Data.json:", err));
+    .catch(err => {
+      console.error("Error loading season2data.json:", err);
+      document.getElementById('standingsContent').innerHTML = "Failed to load season data.";
+    });
 }
 
-function renderStandings(data) {
-  const container = document.getElementById("standingsContent");
-  if (!container) return;
+// Render weekly content (maps and speedruns)
+function renderWeekContent(containerId, weekData) {
+  const container = document.getElementById(containerId);
+  if (!container || !weekData) return;
 
-  const teams = data.teams.slice().sort((a, b) => b.points - a.points);
-  const medals = ['🥇', '🥈', '🥉'];
+  let html = `<h1>GLTP Season 2 Week ${containerId.replace('week', '').replace('Content', '')} Maps</h1>`;
 
-  let html = `<table class="standings-table"><tr><th>#</th><th>Team</th><th>Pts</th><th>W-L-T</th></tr>`;
-  teams.forEach((team, i) => {
-    const medal = medals[i] || '';
-    html += `<tr>
-      <td>${i + 1}</td>
-      <td>${medal} ${team.name}</td>
-      <td>${team.points}</td>
-      <td>${team.wins}-${team.losses}-${team.ties}</td>
-    </tr>`;
+  // Create maps table
+  html += `
+  <table style="width: 100%; table-layout: fixed;">
+    <colgroup>
+      <col style="width: 15%;">
+      <col style="width: 23%;">
+      <col style="width: 25%;">
+      <col style="width: 15%;">
+      <col style="width: 5%;">
+      <col style="width: 9%;">
+      <col style="width: 8%;">
+    </colgroup>
+    <tr>
+      <th>Map</th>
+      <th>Group Preset</th>
+      <th>Speedrun Group Preset</th>
+      <th>Settings</th>
+      <th>Points</th>
+      <th>Points for Fastest Time</th>
+      <th>Difficulty <br> Rank</th>
+    </tr>
+  `;
+
+  // Add each map to the table
+  weekData.forEach(map => {
+    html += `
+    <tr>
+      <td><a href="${map.link}" target="_blank">${map.mapName} <br> by ${map.author} </a> <br><br> ${map.recommendedBalls} balls recommended</td>
+      <td>
+        <span class="map-id">${map.preset}</span> <br> <br>
+        <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
+        <button class="open-button" onclick="openMap(this)">Launch Group</button>
+      </td>
+      <td>
+        <span class="map-id">${map.speedrunPreset}</span> <br> <br>
+        <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
+        <button class="open-button" onclick="openMap(this)">Launch Group</button>
+      </td>
+      <td>${map.settings}</td>
+      <td>${map.points}</td>
+      <td>${map.fastestPoints}</td>
+      <td>${map.difficulty}</td>
+    </tr>
+    `;
   });
-  html += `</table>`;
 
-  container.innerHTML += html;
+  html += `</table><h1>Speedruns</h1>`;
+
+  // Add speedrun tables for each map
+  weekData.forEach(map => {
+    html += `
+    <table>
+      <tr>
+        <th colspan="6">${map.mapName}</th>
+      </tr>
+      <tr>
+        <th>Rank</th>
+        <th>Time</th>
+        <th>Players</th>
+        <th>Team</th>
+        <th>Replay</th>
+        <th>Points</th>
+      </tr>
+    `;
+
+    // Add speedrun entries if they exist
+    if (map.speedruns && map.speedruns.length > 0) {
+      map.speedruns.forEach(run => {
+        html += `
+        <tr>
+          <td>${run.rank}</td>
+          <td>${run.time}</td>
+          <td>${Array.isArray(run.players) ? run.players.join('<br>') : run.players}</td>
+          <td>${run.team}</td>
+          <td><a href="${run.replay}">Link</a></td>
+          <td>${run.points}</td>
+        </tr>
+        `;
+      });
+    }
+
+    // Add an empty row for aesthetics
+    html += `
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a href="#">Link</a></td>
+        <td></td>
+      </tr>
+    </table>
+    `;
+  });
+
+  container.innerHTML = html;
 }
 
+// Render standings table and team details
+function renderStandings(containerId, teamsData) {
+  const container = document.getElementById(containerId);
+  if (!container || !teamsData) return;
+
+  // Sort teams by total points descending
+  const sortedTeams = [...teamsData].sort((a, b) =>
+    b["Total\nPoints"] - a["Total\nPoints"]
+  );
+
+  let html = `<h2>GLTP Season 2 Standings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Team</th>
+        <th>Total Points</th>
+        <th>Completion Points</th>
+        <th>Speedrun Points</th>
+        <th>Week1 Points</th>
+        <th>Week2 Points</th>
+        <th>Week3 Points</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  // Add each team's standings
+  sortedTeams.forEach((team, index) => {
+    html += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${team.name}</td>
+        <td>${team["Total\nPoints"]}</td>
+        <td>${team["Completion\nPoints"]}</td>
+        <td>${team["Speedrun\nPoints"]}</td>
+        <td>${team["Week1\nPoints"]}</td>
+        <td>${team["Week2\nPoints"]}</td>
+        <td>${team["Week3\nPoints"]}</td>
+      </tr>
+    `;
+  });
+
+  html += `</tbody></table>`;
+
+  // Add collapsible sections for each team's points
+  sortedTeams.forEach(team => {
+    const teamIdSafe = team.name.toLowerCase().replace(/\s+/g, '-');
+
+    html += `
+    <h2 class="toggle-header" data-toggle-target="${teamIdSafe}-points-table">
+      <span class="arrow">▶</span>${team.name} Points
+    </h2>
+    <div id="${teamIdSafe}-points-table" class="toggle-section" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Map</th>
+            <th>Completion</th>
+            <th>Speedrun</th>
+            <th>CPoints</th>
+            <th>SPoints</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    // Will need to adjust this based on actual data structure in your JSON
+    // This is a placeholder - you'll need to connect it to your actual completion and speedrun data
+    if (seasonData && seasonData.week1) {
+      seasonData.week1.forEach((map, idx) => {
+        // Check if team completed this map (simple sample logic)
+        const hasCompleted = teamCompletedMap(team.name, map);
+        const speedrunRank = teamSpeedrunRank(team.name, map);
+
+        html += `
+        <tr>
+          <td>1</td>
+          <td><a href="${map.link}" target="_blank">${map.mapName}</a></td>
+          <td>${hasCompleted ?
+            '<i class="fas fa-check green-icon" aria-label="Yes"></i>' :
+            '<i class="fas fa-times red-icon" aria-label="No"></i>'}</td>
+          <td>${speedrunRank ? getMedalForRank(speedrunRank) :
+            '<i class="fas fa-times red-icon" aria-label="No"></i>'}</td>
+          <td>${hasCompleted ? map.points : '0'}</td>
+          <td>${speedrunRank ? getPointsForRank(speedrunRank) : '0'}</td>
+        </tr>
+        `;
+      });
+    }
+
+    html += `</tbody></table></div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+// Helper function to check if a team completed a map
+function teamCompletedMap(teamName, map) {
+  // This is a placeholder - implement based on your data structure
+  // Assuming a team completed a map if they have any speedrun entry for it
+  return map.speedruns && map.speedruns.some(run => run.team === teamName);
+}
+
+// Helper function to get a team's speedrun rank on a map
+function teamSpeedrunRank(teamName, map) {
+  // Find the team's best speedrun rank on this map
+  if (!map.speedruns) return null;
+
+  const teamRun = map.speedruns.find(run => run.team === teamName);
+  return teamRun ? teamRun.rank : null;
+}
+
+// Helper function to get medal emoji based on rank
+function getMedalForRank(rank) {
+  const medals = ['🥇', '🥈', '🥉'];
+  return rank <= 3 ? medals[rank - 1] : rank;
+}
+
+// Helper function to get points based on rank
+function getPointsForRank(rank) {
+  // Assuming 1st = 2 points, 2nd = 1 point, others = 0
+  return rank === 1 ? 2 : rank === 2 ? 1 : 0;
+}
+
+// Render team rosters
+function renderRosters(containerId, teamsData) {
+  const container = document.getElementById(containerId);
+  if (!container || !teamsData) return;
+
+  let html = `<h1>GLTP Season 2 Team Rosters</h1>`;
+
+  teamsData.forEach(team => {
+    html += `
+    <h2>${team.name}</h2>
+    <ul class="roster-list">
+    `;
+
+    team.roster.forEach(player => {
+      html += `<li>${player}</li>`;
+    });
+
+    html += `</ul>`;
+  });
+
+  container.innerHTML = html;
+}
+
+// Event listener setup for collapsible sections
 function enableToggleListeners() {
   document.querySelectorAll('.toggle-header').forEach(header => {
     header.addEventListener('click', () => {
@@ -110,6 +345,7 @@ function enableToggleListeners() {
   });
 }
 
+// Copy map ID to clipboard
 function copyMapID(button) {
   const span = button.parentElement.querySelector('.map-id');
   const mapId = span.textContent;
@@ -125,6 +361,7 @@ function copyMapID(button) {
   }
 }
 
+// Open map in a new tab
 function openMap(button) {
   const span = button.parentElement.querySelector('.map-id');
   const mapId = span.textContent;
@@ -158,10 +395,12 @@ function openMap(button) {
   }
 }
 
+// Toggle dropdown menu
 function toggleDropdown() {
   document.getElementById("dropdownContent").classList.toggle("show");
 }
 
+// Close dropdown when clicking outside
 window.addEventListener("click", function (e) {
   if (!e.target.matches('.dropbtn')) {
     const dropdown = document.getElementById("dropdownContent");
@@ -171,7 +410,9 @@ window.addEventListener("click", function (e) {
   }
 });
 
+// Initialize page on load
 document.addEventListener('DOMContentLoaded', () => {
+  // Determine which page to show based on URL hash
   const hash = window.location.hash.slice(1);
   if (navItems[hash]) {
     const { pageId, linkId } = navItems[hash];
@@ -181,125 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage(pageId, linkId);
   }
 
-  loadPageContent('gltpRosters.html', 'rosterContent');
-  loadPageContent('S2W1.html', 'week1Content');
-  loadPageContent('S2W2.html', 'week2Content');
-  loadPageContent('S2W3.html', 'week3Content');
-  loadPageContent('gltp_links.html', 'linksContent');
-  loadPageContent('ofm.html', 'ofmContent');
-  loadPageContent('standings.html', 'standingsContent');
+  // Fetch all data from JSON and render pages
+  fetchSeasonData();
 });
-
-function medal(rank) {
-  const medals = ["🥇", "🥈", "🥉"];
-  return rank <= 3 ? `${medals[rank - 1]} ${rank}` : rank;
-}
-
-function generatePage(data) {
-  if (window.location.hash === '#week1') {
-    const week1Content = document.getElementById('week1Content');
-    if (week1Content) {
-      week1Content.innerHTML = generateWeek1Content(data.week1);
-    }
-  }
-  const container = document.getElementById("content");
-
-  container.innerHTML = `<h1>${data.title}</h1>`;
-
-  const mapTable = document.createElement("table");
-  mapTable.style.width = "100%";
-  mapTable.style.tableLayout = "fixed";
-  mapTable.innerHTML = `
-    <colgroup>
-      <col style="width: 15%;">
-      <col style="width: 23%;">
-      <col style="width: 25%;">
-      <col style="width: 15%;">
-      <col style="width: 5%;">
-      <col style="width: 9%;">
-      <col style="width: 8%;">
-    </colgroup>
-    <tr>
-      <th>Map</th>
-      <th>Group Preset</th>
-      <th>Speedrun Group Preset</th>
-      <th>Settings</th>
-      <th>Points</th>
-      <th>Points for Fastest Time</th>
-      <th>Difficulty <br> Rank</th>
-    </tr>
-  `;
-
-  data.maps.forEach(map => {
-    mapTable.innerHTML += `
-      <tr>
-        <td><a href="${map.mapUrl}" target="_blank">${map.name} <br> by ${map.author}</a><br><br>${map.playersRecommended} balls recommended</td>
-        <td>
-          <span class="map-id">${map.groupPreset}</span><br><br>
-          <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
-          <button class="open-button" onclick="openMap(this)">Launch Group</button>
-        </td>
-        <td>
-          <span class="map-id">${map.speedrunPreset}</span><br><br>
-          <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
-          <button class="open-button" onclick="openMap(this)">Launch Group</button>
-        </td>
-        <td>${map.settings}</td>
-        <td>${map.points}</td>
-        <td>${map.fastestTimePoints}</td>
-        <td>${medal(map.difficulty)}</td>
-      </tr>
-    `;
-  });
-
-  container.appendChild(mapTable);
-}
-
-function generateWeek1Content(week1Data) {
-  let html = `
-    <table style="width: 100%; table-layout: fixed;">
-      <colgroup>
-        <col style="width: 15%;">
-        <col style="width: 23%;">
-        <col style="width: 25%;">
-        <col style="width: 15%;">
-        <col style="width: 5%;">
-        <col style="width: 9%;">
-        <col style="width: 8%;">
-      </colgroup>
-      <tr>
-        <th>Map</th>
-        <th>Group Preset</th>
-        <th>Speedrun Group Preset</th>
-        <th>Settings</th>
-        <th>Points</th>
-        <th>Points for Fastest Time</th>
-        <th>Difficulty <br> Rank</th>
-      </tr>
-  `;
-
-  week1Data.forEach(map => {
-    html += `
-      <tr>
-        <td><a href="${map.link}" target="_blank">${map.mapName} <br> by ${map.author}</a> <br><br> ${map.recommendedBalls} balls recommended</td>
-        <td>
-          <span class="map-id">${map.preset}</span> <br> <br>
-          <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
-          <button class="open-button" onclick="openMap(this)">Launch Group</button>
-        </td>
-        <td>
-          <span class="map-id">${map.speedrunPreset}</span> <br> <br>
-          <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
-          <button class="open-button" onclick="openMap(this)">Launch Group</button>
-        </td>
-        <td>${map.settings}</td>
-        <td>${map.points}</td>
-        <td>${map.fastestPoints}</td>
-        <td>${map.difficulty}</td>
-      </tr>
-    `;
-  });
-
-  html += `</table>`;
-  return html;
-}
