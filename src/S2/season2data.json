@@ -126,10 +126,12 @@
   "teams": [
     {
       "name": "FWO",
-      "points": 0,
-      "wins": 0,
-      "losses": 0,
-      "ties": 0,
+      "Total\nPoints": 2,
+      "Completion\nPoints": 1,
+      "Speedrun\nPoints": 1,
+      "Week1\nPoints": 2,
+      "Week2\nPoints": 0,
+      "Week3\nPoints": 0,
       "roster": [
         "DAD", "Madoka", "Carrrrrl", "DrCristinaYang", "TeaForYou&Me",
         "MarcusYallow", "Beach", "the buttons"
@@ -137,10 +139,12 @@
     },
     {
       "name": "Fall Bondlers",
-      "points": 0,
-      "wins": 0,
-      "losses": 0,
-      "ties": 0,
+      "Total\nPoints": 15,
+      "Completion\nPoints": 7,
+      "Speedrun\nPoints": 8,
+      "Week1\nPoints": 15,
+      "Week2\nPoints": 0,
+      "Week3\nPoints": 0,
       "roster": [
         "SB ARMY SB", "Bashella", "LogisticMap", "timo_tay", "Billy",
         "perl", "Bambi", "Ball Of Fame", "hmmmm"
@@ -148,20 +152,24 @@
     },
     {
       "name": "Teletubbies",
-      "points": 0,
-      "wins": 0,
-      "losses": 0,
-      "ties": 0,
+      "Total\nPoints": 0,
+      "Completion\nPoints": 0,
+      "Speedrun\nPoints": 0,
+      "Week1\nPoints": 0,
+      "Week2\nPoints": 0,
+      "Week3\nPoints": 0,
       "roster": [
         "elfitzo", "Bobbay", "itag", "Vexation"
       ]
     },
     {
       "name": "Honkeys",
-      "points": 0,
-      "wins": 0,
-      "losses": 0,
-      "ties": 0,
+      "Total\nPoints": 4,
+      "Completion\nPoints": 4,
+      "Speedrun\nPoints": 0,
+      "Week1\nPoints": 4,
+      "Week2\nPoints": 0,
+      "Week3\nPoints": 0,
       "roster": [
         "burt", "Honky", "Troglodyte", "HappyCracker",
         "L1GMa", "PoonLuvr69", "+1"
@@ -169,10 +177,12 @@
     },
     {
       "name": "West Coast",
-      "points": 0,
-      "wins": 0,
-      "losses": 0,
-      "ties": 0,
+      "Total\nPoints": 0,
+      "Completion\nPoints": 0,
+      "Speedrun\nPoints": 0,
+      "Week1\nPoints": 0,
+      "Week2\nPoints": 0,
+      "Week3\nPoints": 0,
       "roster": [
         "MRCOW", "EpicBlob", "EvTheSmev", "bleast",
         "Valerian", "Tinderfella"
@@ -180,10 +190,12 @@
     },
     {
       "name": "Momentum Mori",
-      "points": 0,
-      "wins": 0,
-      "losses": 0,
-      "ties": 0,
+      "Total\nPoints": 0,
+      "Completion\nPoints": 0,
+      "Speedrun\nPoints": 0,
+      "Week1\nPoints": 0,
+      "Week2\nPoints": 0,
+      "Week3\nPoints": 0,
       "roster": [
         "BigBird"
       ]
