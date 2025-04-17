@@ -164,7 +164,7 @@ window.addEventListener("click", function (e) {
   }
 });
 
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const hash = window.location.hash.slice(1);
   if (navItems[hash]) {
     const { pageId, linkId } = navItems[hash];
@@ -181,7 +181,6 @@ window.addEventListener('DOMContentLoaded', () => {
   loadPageContent('gltp_links.html', 'linksContent');
   loadPageContent('ofm.html', 'ofmContent');
   loadPageContent('standings.html', 'standingsContent');
-
 });
 
 function medal(rank) {
@@ -272,42 +271,21 @@ function generatePage(data) {
     }
 
     srTable.innerHTML += `
-      <tr>
-        <td></td><td></td><td></td><td></td><td><a href="#">Link</a></td><td></td>
-      </tr>
-      <tr>
-        <td></td><td></td><td></td><td></td><td><a href="#">Link</a></td><td></td>
-      </tr>
+      <tr><td></td><td></td><td></td><td></td><td><a href="#">Link</a></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td><a href="#">Link</a></td><td></td></tr>
     `;
 
     container.appendChild(srTable);
   });
 }
 
-function copyMapID(button) {
-  const text = button.parentElement.querySelector(".map-id").textContent;
-  navigator.clipboard.writeText(text);
-  alert("Copied preset: " + text);
-}
-
-function openMap(button) {
-  const preset = button.parentElement.querySelector(".map-id").textContent;
-  const url = `https://tagpro.koalabeast.com/groups/#${preset}`;
-  window.open(url, "_blank");
-}
-
-// Fetch JSON on page load
-window.onload = () => {
-  fetch('season2Data.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => generatePage(data))
-    .catch(err => {
-      document.getElementById("content").innerHTML = `<p>Error loading data: ${err}</p>`;
-      console.error(err);
-    });
-};
+fetch('season2Data.json')
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  })
+  .then(data => generatePage(data))
+  .catch(err => {
+    document.getElementById("content").innerHTML = `<p>Error loading data: ${err}</p>`;
+    console.error(err);
+  });
