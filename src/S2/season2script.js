@@ -364,20 +364,47 @@ function renderRosters(containerId, teamsData) {
   const container = document.getElementById(containerId);
   if (!container || !teamsData) return;
 
-  let html = `<h1>GLTP Season 2 Team Rosters</h1>`;
+  let html = `
+  <table>
+    <tr>
+      <th class="title" colspan="${teamsData.length}">Season 2 GLTP Rosters</th>
+    </tr>
+    <tr>
+  `;
 
+  // Add team names as headers
   teamsData.forEach(team => {
-    html += `
-    <h2>${team.name}</h2>
-    <ul class="roster-list">
-    `;
+    html += `<th>${team.name}</th>`;
+  });
 
-    team.roster.forEach(player => {
-      html += `<li>${player}</li>`;
+  html += `</tr>`;
+
+  // Determine the maximum roster size
+  const maxRosterSize = Math.max(...teamsData.map(team => team.roster.length));
+
+  // Create rows for each player position
+  for (let i = 0; i < maxRosterSize; i++) {
+    html += `<tr>`;
+
+    teamsData.forEach(team => {
+      if (i === 0) {
+        // First player is captain (with gold icon)
+        html += team.roster[i] ?
+          `<td><img src="http://i.imgur.com/U3KTppv.png" alt="icon" style="height: 1em; vertical-align: middle; margin-right: 5px;">${team.roster[i]}</td>` :
+          `<td></td>`;
+      } else if (i < team.roster.length) {
+        // Regular players with silver icon
+        html += `<td><img src="http://i.imgur.com/Qw987lA.png" alt="icon" style="height: 1em; vertical-align: middle; margin-right: 5px;">${team.roster[i]}</td>`;
+      } else {
+        // Empty cells for teams with fewer players
+        html += `<td></td>`;
+      }
     });
 
-    html += `</ul>`;
-  });
+    html += `</tr>`;
+  }
+
+  html += `</table>`;
 
   container.innerHTML = html;
 }
