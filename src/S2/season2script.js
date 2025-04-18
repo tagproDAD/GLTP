@@ -131,9 +131,9 @@ function renderWeekContent(containerId, weekData) {
     <colgroup>
       <col style="width: 15%;">
       <col style="width: 23%;">
-      <col style="width: 28%;">
+      <col style="width: 27%;">
       <col style="width: 15%;">
-      <col style="width: 4%;">
+      <col style="width: 5%;">
       <col style="width: 9%;">
       <col style="width: 6%;">
     </colgroup>
@@ -163,9 +163,9 @@ function renderWeekContent(containerId, weekData) {
         <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
         <button class="open-button" onclick="openMap(this)">Launch Group</button>
       </td>
-      <td>${map.settings}</td>
+      <td>${map.settings.replace(/\n/g, "<br>")}</td>
       <td>${map.points}</td>
-      <td>${map.fastestPoints}</td>
+      <td>${map.fastestPoints.replace(/\n/g, "<br>")}</td>
       <td>${map.difficulty}</td>
     </tr>
     `;
