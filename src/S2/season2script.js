@@ -103,6 +103,12 @@ function loadPageContent(containerId, content) {
   }
 }
 
+function getValidSortedSpeedruns(speedruns) {
+  return speedruns
+    .filter(run => run.includeOnSpeedrun === "yes")
+    .sort((a, b) => timeStringToSeconds(a.time) - timeStringToSeconds(b.time));
+}
+
 // Render weekly content (maps and speedruns)
 function renderWeekContent(containerId, weekData) {
   const container = document.getElementById(containerId);
@@ -178,19 +184,22 @@ function renderWeekContent(containerId, weekData) {
 
     // Add speedrun entries if they exist
     if (map.speedruns && map.speedruns.length > 0) {
-      map.speedruns.forEach(run => {
+      const validRuns = getValidSortedSpeedruns(map.speedruns);
+
+      validRuns.forEach((run, index) => {
         html += `
-        <tr>
-          <td>${run.rank}</td>
-          <td>${run.time}</td>
-          <td>${Array.isArray(run.players) ? run.players.join('<br>') : run.players}</td>
-          <td>${run.team}</td>
-          <td><a href="${run.replay}" target="_blank">Link</a></td>
-          <td>${run.points}</td>
-        </tr>
+          <tr>
+            <td>${index + 1}</td>
+            <td>${run.time}</td>
+            <td>${Array.isArray(run.players) ? run.players.join('<br>') : run.players}</td>
+            <td>${run.team}</td>
+            <td><a href="${run.replay}" target="_blank">Link</a></td>
+            <td>${run.points}</td>
+          </tr>
         `;
       });
     }
+
 
     // Add an empty row for aesthetics
     html += `
@@ -320,9 +329,7 @@ function timeStringToSeconds(timeStr) {
 function teamSpeedrunRank(teamName, map) {
   if (!map.speedruns) return null;
 
-  const validRuns = map.speedruns
-    .filter(run => run.includeOnSpeedrun === "yes")
-    .sort((a, b) => timeStringToSeconds(a.time) - timeStringToSeconds(b.time));
+  const validRuns = getValidSortedSpeedruns(map.speedruns);
 
   const teamRuns = validRuns.filter(run => run.team === teamName);
   if (teamRuns.length === 0) return null;
