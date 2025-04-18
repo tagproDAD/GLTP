@@ -91,6 +91,22 @@
           "team": "Fall Bondlers",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=cbad6bac-3a41-4811-b24a-3eb50cc0453f",
           "points": 2
+        },
+        {
+          "rank": 1,
+          "time": "40.762",
+          "players": ["MarcusYallow"],
+          "team": "FWO",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=80e2b911-b7a0-4fd7-ae6e-4a35fd768a95",
+          "points": 2
+        },
+        {
+          "rank": 3,
+          "time": "51.509",
+          "players": ["EvTheSmev"],
+          "team": "West Coasters",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=a969bd6e-390b-40cd-81c9-9bebf79baad2",
+          "points": 0
         }
       ]
     },
@@ -196,7 +212,7 @@
       ]
     },
     {
-      "name": "West Coast",
+      "name": "West Coasters",
       "Total\nPoints": 0,
       "Completion\nPoints": 0,
       "Speedrun\nPoints": 0,
