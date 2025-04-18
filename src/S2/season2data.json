@@ -18,7 +18,8 @@
           "players": ["Some Ball 64"],
           "team": "Fall Bondlers",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=e3cd344d-382b-4fcc-81cc-0f1496682edf",
-          "points": 2
+          "points": 2,
+          "includeOnSpeedrun": "yes"
         }
       ]
     },
@@ -90,7 +91,8 @@
           "players": ["Some Ball 64"],
           "team": "Fall Bondlers",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=cbad6bac-3a41-4811-b24a-3eb50cc0453f",
-          "points": 2
+          "points": 2,
+          "includeOnSpeedrun": "yes"
         },
         {
           "rank": 1,
@@ -98,7 +100,8 @@
           "players": ["MarcusYallow"],
           "team": "FWO",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=80e2b911-b7a0-4fd7-ae6e-4a35fd768a95",
-          "points": 2
+          "points": 2,
+          "includeOnSpeedrun": "yes"
         },
         {
           "rank": 3,
@@ -106,7 +109,8 @@
           "players": ["EvTheSmev"],
           "team": "West Coasters",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=a969bd6e-390b-40cd-81c9-9bebf79baad2",
-          "points": 0
+          "points": 0,
+          "includeOnSpeedrun": "yes"
         }
       ]
     },
@@ -141,7 +145,8 @@
           "players": ["Some Ball 64", "Billy", "Ball Of Fame", "perl"],
           "team": "Fall Bondlers",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=3f0fb6ad-a786-467c-ac3d-6db919eb88f2",
-          "points": 2
+          "points": 2,
+          "includeOnSpeedrun": "yes"
         }
       ]
     },
