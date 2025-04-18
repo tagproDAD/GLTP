@@ -50,6 +50,12 @@ function showPage(pageId, linkId) {
   if (link) link.classList.add('active');
 }
 
+async function loadStaticContent(elementId, htmlPath) {
+  const response = await fetch(htmlPath);
+  const html = await response.text();
+  document.getElementById(elementId).innerHTML = html;
+}
+
 // Main function to fetch and parse JSON data
 function fetchSeasonData() {
   fetch(`season2data.json?v=${window.BUILD_VERSION}`)
@@ -59,9 +65,11 @@ function fetchSeasonData() {
 
       // Render content for each page based on JSON data
       loadPageContent('homeContent', data.pages?.home?.content || "Home content not found.");
-      loadPageContent('ofmContent', data.pages?.ofm?.content || "OFM content not found.");
-      loadPageContent('linksContent', data.pages?.links?.content || "Links content not found.");
       loadPageContent('season1Content', data.pages?.season1?.content || "Season 1 content not found.");
+
+      // Load static content
+      loadStaticContent('ofmContent', 'ofm.html');
+      loadStaticContent('linksContent', 'gltp_links.html');
 
       // Handle week content - check if data exists first
       if (data.week1 && data.week1.length > 0) {
