@@ -131,11 +131,11 @@ function renderWeekContent(containerId, weekData) {
     <colgroup>
       <col style="width: 15%;">
       <col style="width: 23%;">
-      <col style="width: 25%;">
+      <col style="width: 28%;">
       <col style="width: 15%;">
-      <col style="width: 5%;">
+      <col style="width: 4%;">
       <col style="width: 9%;">
-      <col style="width: 8%;">
+      <col style="width: 6%;">
     </colgroup>
     <tr>
       <th>Map</th>
