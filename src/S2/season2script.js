@@ -254,7 +254,7 @@ function renderStandings(containerId, teamsData) {
   html += `</tbody></table>`;
 
   // Add collapsible sections for each team's points
-  sortedTeams.forEach(team => {
+  teamsData.forEach(team => {
     const teamIdSafe = team.name.toLowerCase().replace(/\s+/g, '-');
 
     html += `
@@ -311,14 +311,28 @@ function teamCompletedMap(teamName, map) {
   return map.speedruns && map.speedruns.some(run => run.team === teamName);
 }
 
+function timeStringToSeconds(timeStr) {
+  const [minPart, secPart] = timeStr.split(':');
+  return parseInt(minPart, 10) * 60 + parseFloat(secPart);
+}
+
 // Helper function to get a team's speedrun rank on a map
 function teamSpeedrunRank(teamName, map) {
-  // Find the team's best speedrun rank on this map
   if (!map.speedruns) return null;
 
-  const teamRun = map.speedruns.find(run => run.team === teamName);
-  if (!teamRun || teamRun.includeOnSpeedrun !== "yes") return null;
-  return teamRun ? teamRun.rank : null;
+  const validRuns = map.speedruns
+    .filter(run => run.includeOnSpeedrun === "yes")
+    .sort((a, b) => timeStringToSeconds(a.time) - timeStringToSeconds(b.time));
+
+  const teamRuns = validRuns.filter(run => run.team === teamName);
+  if (teamRuns.length === 0) return null;
+
+  const bestRun = teamRuns.reduce((best, current) =>
+    timeStringToSeconds(current.time) < timeStringToSeconds(best.time) ? current : best
+  );
+
+  const rank = validRuns.findIndex(run => run === bestRun) + 1;
+  return rank;
 }
 
 // Helper function to get medal emoji based on rank

@@ -232,15 +232,6 @@
       "fastestPoints": "1st = 2 points\n2nd = 1 point",
       "difficulty": "Medium",
       "speedruns": [
-        {
-          "rank": 1,
-          "time": "7:41.259",
-          "players": ["Some Ball 64", "Billy", "Ball Of Fame", "perl"],
-          "team": "Fall Bondlers",
-          "replay": "https://tagpro.koalabeast.com/replays?uuid=3f0fb6ad-a786-467c-ac3d-6db919eb88f2",
-          "points": 2,
-          "includeOnSpeedrun": "yes"
-        }
       ]
     },
     {
