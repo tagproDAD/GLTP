@@ -321,8 +321,13 @@ function teamCompletedMap(teamName, map) {
 }
 
 function timeStringToSeconds(timeStr) {
-  const [minPart, secPart] = timeStr.split(':');
-  return parseInt(minPart, 10) * 60 + parseFloat(secPart);
+  if (timeStr.includes(':')) {
+    const [minPart, secPart] = timeStr.split(':');
+    return parseInt(minPart, 10) * 60 + parseFloat(secPart);
+  } else {
+    // Format is just seconds (e.g. "40.123")
+    return parseFloat(timeStr);
+  }
 }
 
 // Helper function to get a team's speedrun rank on a map
