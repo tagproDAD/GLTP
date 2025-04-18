@@ -75,19 +75,19 @@ function fetchSeasonData() {
       if (data.week1 && data.week1.length > 0) {
         renderWeekContent('week1Content', data.week1);
       } else {
-        loadPageContent('week1Content', "Week 1 content not yet available.");
+        loadStaticContent('week1Content', 'S2W1.html');
       }
 
       if (data.week2 && data.week2.length > 0) {
         renderWeekContent('week2Content', data.week2);
       } else {
-        loadPageContent('week2Content', "Week 2 content not yet available.");
+        loadStaticContent('week2Content', 'S2W2.html');
       }
 
       if (data.week3 && data.week3.length > 0) {
         renderWeekContent('week3Content', data.week3);
       } else {
-        loadPageContent('week3Content', "Week 3 content not yet available.");
+        loadStaticContent('week3Content', 'S2W3.html');
       }
 
       // Render standings and rosters
