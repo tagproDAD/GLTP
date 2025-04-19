@@ -116,6 +116,13 @@
           "team": "Honkeys",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=8bf20d32-1b96-430b-8e33-98254e4dcac5",
           "includeOnSpeedrun": "no"
+        },
+        {
+          "time": "30.886",
+          "players": ["BigBird"],
+          "team": "Momentum Mori",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=31e07696-fbf1-4a1d-bd1b-00b1aada0fbf",
+          "includeOnSpeedrun": "yes"
         }
       ]
     },
