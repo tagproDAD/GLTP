@@ -63,6 +63,9 @@ function fetchSeasonData() {
     .then(data => {
       seasonData = data;
 
+      // Calculate points for all teams
+      calculateAllTeamPoints(data);
+
       // Render content for each page based on JSON data
       loadPageContent('homeContent', data.pages?.home?.content || "Home content not found.");
       loadPageContent('season1Content', data.pages?.season1?.content || "Season 1 content not found.");
@@ -103,6 +106,72 @@ function fetchSeasonData() {
     });
 }
 
+// Calculate points for all teams
+function calculateAllTeamPoints(data) {
+  // Initialize point counters for all teams
+  data.teams.forEach(team => {
+    team["Completion\nPoints"] = 0;
+    team["Speedrun\nPoints"] = 0;
+    team["Week1\nPoints"] = 0;
+    team["Week2\nPoints"] = 0;
+    team["Week3\nPoints"] = 0;
+    team["Total\nPoints"] = 0;
+  });
+
+  // Calculate points for each week
+  if (data.week1 && data.week1.length > 0) {
+    calculateWeekPoints(data.teams, data.week1, 1);
+  }
+
+  if (data.week2 && data.week2.length > 0) {
+    calculateWeekPoints(data.teams, data.week2, 2);
+  }
+
+  if (data.week3 && data.week3.length > 0) {
+    calculateWeekPoints(data.teams, data.week3, 3);
+  }
+
+  // Calculate total points
+  data.teams.forEach(team => {
+    team["Total\nPoints"] = team["Completion\nPoints"] + team["Speedrun\nPoints"];
+  });
+}
+
+// Calculate points for a specific week
+function calculateWeekPoints(teams, weekData, weekNumber) {
+  teams.forEach(team => {
+    let weekCompletionPoints = 0;
+    let weekSpeedrunPoints = 0;
+
+    weekData.forEach(map => {
+      // Calculate completion points
+      const completionPoints = calculateCompletionPoints(team.name, map);
+      weekCompletionPoints += completionPoints;
+
+      // Calculate speedrun points
+      const speedrunPoints = calculateSpeedrunPoints(team.name, map);
+      weekSpeedrunPoints += speedrunPoints;
+    });
+
+    // Update team data
+    team["Completion\nPoints"] += weekCompletionPoints;
+    team["Speedrun\nPoints"] += weekSpeedrunPoints;
+    team[`Week${weekNumber}\nPoints`] = weekCompletionPoints + weekSpeedrunPoints;
+  });
+}
+
+// Calculate completion points for a team on a specific map
+function calculateCompletionPoints(teamName, map) {
+  const hasCompleted = teamCompletedMap(teamName, map);
+  return hasCompleted ? map.points : 0;
+}
+
+// Calculate speedrun points for a team on a specific map
+function calculateSpeedrunPoints(teamName, map) {
+  const speedrunRank = teamSpeedrunRank(teamName, map);
+  return speedrunRank ? getPointsForRank(speedrunRank) : 0;
+}
+
 // Helper function to load simple page content
 function loadPageContent(containerId, content) {
   const container = document.getElementById(containerId);
@@ -112,9 +181,12 @@ function loadPageContent(containerId, content) {
 }
 
 function getValidSortedSpeedruns(speedruns) {
-  return speedruns
+  // Filter out speedruns that should not be included
+  const validRuns = speedruns
     .filter(run => run.includeOnSpeedrun === "yes")
     .sort((a, b) => timeStringToSeconds(a.time) - timeStringToSeconds(b.time));
+
+  return validRuns;
 }
 
 // Render weekly content (maps and speedruns)
@@ -195,6 +267,7 @@ function renderWeekContent(containerId, weekData) {
       const validRuns = getValidSortedSpeedruns(map.speedruns);
 
       validRuns.forEach((run, index) => {
+        const points = getPointsForRank(index + 1);
         html += `
           <tr>
             <td>${index + 1}</td>
@@ -202,12 +275,11 @@ function renderWeekContent(containerId, weekData) {
             <td>${Array.isArray(run.players) ? run.players.join('<br>') : run.players}</td>
             <td>${run.team}</td>
             <td><a href="${run.replay}" target="_blank">Link</a></td>
-            <td>${run.points}</td>
+            <td>${points}</td>
           </tr>
         `;
       });
     }
-
 
     // Add an empty row for aesthetics
     html += `
@@ -282,7 +354,7 @@ function renderStandings(containerId, teamsData) {
       <table>
         <thead>
           <tr>
-            <th>#</th>
+            <th>Week</th>
             <th>Map</th>
             <th>Completion</th>
             <th>Speedrun</th>
@@ -294,27 +366,35 @@ function renderStandings(containerId, teamsData) {
     `;
 
     // Loop through each week's maps
-    if (seasonData && seasonData.week1) {
-      seasonData.week1.forEach((map, idx) => {
-        // Check if team completed this map (has a speedrun entry)
-        const hasCompleted = teamCompletedMap(team.name, map);
-        const speedrunRank = teamSpeedrunRank(team.name, map);
+    const weeks = ['week1', 'week2', 'week3'];
 
-        html += `
-        <tr>
-          <td>1</td>
-          <td><a href="${map.link}" target="_blank">${map.mapName}</a></td>
-          <td>${hasCompleted ?
-            '<i class="fas fa-check green-icon" aria-label="Yes"></i>' :
-            '<i class="fas fa-times red-icon" aria-label="No"></i>'}</td>
-          <td>${speedrunRank ? getMedalForRank(speedrunRank) :
-            '<i class="fas fa-times red-icon" aria-label="No"></i>'}</td>
-          <td>${hasCompleted ? map.points : '0'}</td>
-          <td>${speedrunRank ? getPointsForRank(speedrunRank) : '0'}</td>
-        </tr>
-        `;
-      });
-    }
+    weeks.forEach(weekKey => {
+      if (seasonData && seasonData[weekKey]) {
+        const weekNumber = weekKey.replace('week', '');
+
+        seasonData[weekKey].forEach((map, idx) => {
+          // Check if team completed this map (has a speedrun entry)
+          const hasCompleted = teamCompletedMap(team.name, map);
+          const speedrunRank = teamSpeedrunRank(team.name, map);
+          const completionPoints = hasCompleted ? map.points : 0;
+          const speedrunPoints = speedrunRank ? getPointsForRank(speedrunRank) : 0;
+
+          html += `
+          <tr>
+            <td>${weekNumber}</td>
+            <td><a href="${map.link}" target="_blank">${map.mapName}</a></td>
+            <td>${hasCompleted ?
+              '<i class="fas fa-check green-icon" aria-label="Yes"></i>' :
+              '<i class="fas fa-times red-icon" aria-label="No"></i>'}</td>
+            <td>${speedrunRank ? getMedalForRank(speedrunRank) :
+              '<i class="fas fa-times red-icon" aria-label="No"></i>'}</td>
+            <td>${completionPoints}</td>
+            <td>${speedrunPoints}</td>
+          </tr>
+          `;
+        });
+      }
+    });
 
     html += `</tbody></table></div>`;
   });
@@ -330,12 +410,19 @@ function teamCompletedMap(teamName, map) {
 
 function timeStringToSeconds(timeStr) {
   if (timeStr.includes(':')) {
-    const [minPart, secPart] = timeStr.split(':');
-    return parseInt(minPart, 10) * 60 + parseFloat(secPart);
-  } else {
-    // Format is just seconds (e.g. "40.123")
-    return parseFloat(timeStr);
+    const parts = timeStr.split(':');
+    if (parts.length === 3) {
+      // Format is "hh:mm:ss.ms" or similar
+      const [hours, minutes, seconds] = parts;
+      return parseInt(hours, 10) * 3600 + parseInt(minutes, 10) * 60 + parseFloat(seconds);
+    } else if (parts.length === 2) {
+      // Format is "mm:ss.ms" or similar
+      const [minutes, seconds] = parts;
+      return parseInt(minutes, 10) * 60 + parseFloat(seconds);
+    }
   }
+  // Format is just seconds (e.g. "40.123")
+  return parseFloat(timeStr);
 }
 
 // Helper function to get a team's speedrun rank on a map
@@ -344,15 +431,14 @@ function teamSpeedrunRank(teamName, map) {
 
   const validRuns = getValidSortedSpeedruns(map.speedruns);
 
-  const teamRuns = validRuns.filter(run => run.team === teamName);
-  if (teamRuns.length === 0) return null;
+  // Find the team's position in the valid, sorted runs
+  for (let i = 0; i < validRuns.length; i++) {
+    if (validRuns[i].team === teamName) {
+      return i + 1; // Return 1-based rank
+    }
+  }
 
-  const bestRun = teamRuns.reduce((best, current) =>
-    timeStringToSeconds(current.time) < timeStringToSeconds(best.time) ? current : best
-  );
-
-  const rank = validRuns.findIndex(run => run === bestRun) + 1;
-  return rank;
+  return null; // Team didn't have a valid run
 }
 
 // Helper function to get medal emoji based on rank
@@ -362,8 +448,8 @@ function getMedalForRank(rank) {
 }
 
 // Helper function to get points based on rank
+// Using the fastestPoints logic: 1st = 2 points, 2nd = 1 point
 function getPointsForRank(rank) {
-  // Assuming 1st = 2 points, 2nd = 1 point, others = 0
   return rank === 1 ? 2 : rank === 2 ? 1 : 0;
 }
 
