@@ -222,6 +222,19 @@
   ],
   "week2": [
     {
+      "mapName": "Stonky Tonk Tonk",
+      "author": "TheLegend27",
+      "link": "https://fortunatemaps.herokuapp.com/map/89834",
+      "recommendedBalls": "1+",
+      "preset": "gZMefGdtggtuiaaaJyaraaksaaamaaaYE",
+      "speedrunPreset": "gZMefGdtggtkiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 1,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Easy",
+      ]
+    },
+    {
       "mapName": "You Need Two (Official FWO)",
       "author": "Danny",
       "link": "https://fortunatemaps.herokuapp.com/map/82275",
@@ -244,7 +257,7 @@
       "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant\nno RB or JJ",
       "points": 2,
       "fastestPoints": "1st = 2 points\n2nd = 1 point",
-      "difficulty": "Easy",
+      "difficulty": "Medium",
       "speedruns": [
       ]
     },
@@ -256,20 +269,6 @@
       "preset": "gZMefGyYggtaiaaaJraaksaaamaaaE",
       "speedrunPreset": "gZMefGyYggtaiaaaJyaraaasaaamaaaYEG",
       "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
-      "points": 3,
-      "fastestPoints": "1st = 2 points\n2nd = 1 point",
-      "difficulty": "medium",
-      "speedruns": [
-      ]
-    },
-    {
-      "mapName": "Aussie Team Action V2 Complete [3 jump]",
-      "author": "Curveballed & FWO",
-      "link": "https://fortunatemaps.herokuapp.com/map/89585",
-      "recommendedBalls": "3+",
-      "preset": "gZMefGdtggtuiaaaJyaraaksaaamaaaYE",
-      "speedrunPreset": "gZMefGdtggtkiaaaJyaraaasaaamaaaYEG",
-      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant\n 3 jumps",
       "points": 3,
       "fastestPoints": "1st = 2 points\n2nd = 1 point",
       "difficulty": "Medium",
