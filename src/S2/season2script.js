@@ -279,20 +279,20 @@ function renderWeekContent(containerId, weekData) {
           </tr>
         `;
       });
+    } else if (map.speedruns && map.speedruns.length == 0) {
+      // Add an empty row for aesthetics
+      html += `
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><a href="#">Link</a></td>
+          <td></td>
+        </tr>
+      </table>
+      `;
     }
-
-    // Add an empty row for aesthetics
-    html += `
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><a href="#">Link</a></td>
-        <td></td>
-      </tr>
-    </table>
-    `;
   });
 
   container.innerHTML = html;
