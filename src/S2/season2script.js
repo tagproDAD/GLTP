@@ -444,7 +444,7 @@ function teamSpeedrunRank(teamName, map) {
 // Helper function to get medal emoji based on rank
 function getMedalForRank(rank) {
   const medals = ['🥇', '🥈', '🥉'];
-  return rank <= 3 ? medals[rank - 1] : rank;
+  return rank <= 3 ? medals[rank - 1] : '<i class="fas fa-times red-icon" aria-label="Not top 3"></i>';
 }
 
 // Helper function to get points based on rank
