@@ -270,20 +270,6 @@
       "speedruns": []
     },
     {
-      "mapName": "Toothy (race map)",
-      "author": "Mr. Hat",
-      "link": "https://fortunatemaps.herokuapp.com/map/10433",
-      "recommendedBalls": "3+",
-      "preset": "gZMefrKTggtaiaaaJraaksaaaE",
-      "speedrunPreset": "gZMefrKTggtkcbiaaaJybraaasaaaYEG",
-      "settings": "Bomb Respawn: Default\nBoost Respawn: Instant",
-      "points": 1,
-      "fastestPoints": "1st = 2 points\n2nd = 1 point",
-      "difficulty": "Medium",
-      "speedruns": [
-      ]
-    },
-    {
       "mapName": "Barbed Wire (Official FWO)",
       "author": "Bow & FWO",
       "link": "https://fortunatemaps.herokuapp.com/map/88925",
