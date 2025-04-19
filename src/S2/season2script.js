@@ -308,7 +308,7 @@ function renderStandings(containerId, teamsData) {
     b["Total\nPoints"] - a["Total\nPoints"]
   );
 
-  let html = `<h2>GLTP Season 2 Standings</h2>
+  let html = `<h2 class="white-header">GLTP Season 2 Standings</h2>
   <table>
     <thead>
       <tr>
