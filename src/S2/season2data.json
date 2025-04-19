@@ -141,7 +141,16 @@
       "points": 2,
       "fastestPoints": "1st = 2 points\n2nd = 1 point",
       "difficulty": "Medium",
-      "speedruns": []
+      "speedruns": [
+        {
+          "time": "1:37.955",
+          "players": ["DAD.", "Madoka", "MarcusYallow"],
+          "team": "FWO",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=7efa5c49-980e-44b8-95bb-d1d80a01b29b",
+          "points": 2,
+          "includeOnSpeedrun": "yes"
+        },
+      ]
     },
     {
       "mapName": "Buddy System 8 (TM1 Version) 9bob9",
@@ -160,7 +169,7 @@
           "players": ["Some Ball 64", "Billy", "Ball Of Fame", "perl"],
           "team": "Fall Bondlers",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=3f0fb6ad-a786-467c-ac3d-6db919eb88f2",
-          "points": 2,
+          "points": 1,
           "includeOnSpeedrun": "yes"
         },
         {
@@ -170,6 +179,14 @@
           "replay": "https://tagpro.koalabeast.com/replays?uuid=8905e92f-9409-47ab-bd7c-9fd92cc601ec",
           "points": 2,
           "includeOnSpeedrun": "no"
+        },
+        {
+          "time": "5:10.460",
+          "players": ["DAD.", "Madoka", "MarcusYallow"],
+          "team": "FWO",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=1d78bd47-8885-4eb2-9a96-b91f74825488",
+          "points": 2,
+          "includeOnSpeedrun": "yes"
         }
       ]
     },
@@ -184,14 +201,24 @@
       "points": 3,
       "fastestPoints": "1st = 2 points\n2nd = 1 point",
       "difficulty": "Medium",
-      "speedruns": [{
+      "speedruns": [
+        {
         "time": "31:56.917",
         "players": ["DAD.", "Beach", "MarcusYallow"],
         "team": "FWO",
         "replay": "https://tagpro.koalabeast.com/replays?uuid=da4132a7-79b3-411f-808f-10567279e870",
-        "points": 2,
+        "points": 1,
         "includeOnSpeedrun": "yes"
-      }]
+      },
+      {
+      "time": "5:39.990",
+      "players": ["BigBird"],
+      "team": "Momentum Mori",
+      "replay": "https://tagpro.koalabeast.com/replays?uuid=e4d2e772-9e72-40e9-ad0a-eb93ecfd04ba",
+      "points": 2,
+      "includeOnSpeedrun": "yes"
+    }
+    ]
     }
   ],
   "week2": [
