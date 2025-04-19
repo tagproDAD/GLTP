@@ -266,13 +266,13 @@ function renderWeekContent(containerId, weekData) {
     if (map.speedruns && map.speedruns.length > 0) {
       const validRuns = getValidSortedSpeedruns(map.speedruns);
 
-      const replayLinks = `
-      <a href="${run.replay}" target="_blank">Link</a>
-      ${run.youtube ? `<br><a href="${run.youtube}" target="_blank">YouTube</a>` : ''}
-    `;
-
       validRuns.forEach((run, index) => {
         const points = getPointsForRank(index + 1);
+        const replayLinks = `
+        <a href="${run.replay}" target="_blank">Link</a>
+        ${run.youtube ? `<br><a href="${run.youtube}" target="_blank">YouTube</a>` : ''}
+      `;
+      
         html += `
           <tr>
             <td>${index + 1}</td>
