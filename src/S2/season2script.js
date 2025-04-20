@@ -72,6 +72,7 @@ function fetchSeasonData() {
 
       // Load static content
       loadStaticContent('ofmContent', 'ofm.html');
+      loadStaticContent('bountiesContent', 'bounties.html');
       loadStaticContent('linksContent', 'gltp_links.html');
 
       // Handle week content - check if data exists first
@@ -272,7 +273,7 @@ function renderWeekContent(containerId, weekData) {
         <a href="${run.replay}" target="_blank">Link</a>
         ${run.youtube ? `<br><a href="${run.youtube}" target="_blank">YouTube</a>` : ''}
       `;
-      
+
         html += `
           <tr>
             <td>${index + 1}</td>
