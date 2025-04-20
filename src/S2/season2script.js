@@ -3,6 +3,7 @@ const navItems = {
   home: { linkId: 'homeLink', pageId: 'homePage' },
   standings: { linkId: 'standingsLink', pageId: 'standingsPage' },
   ofm: { linkId: 'ofmLink', pageId: 'ofmPage' },
+  bounties: { linkId: 'bountiesLink', pageId: 'bountiesPage' },
   links: { linkId: 'linksLink', pageId: 'linksPage' },
   week1: { linkId: 'week1Link', pageId: 'week1Page' },
   week2: { linkId: 'week2Link', pageId: 'week2Page' },
