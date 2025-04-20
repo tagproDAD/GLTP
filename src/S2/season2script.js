@@ -203,9 +203,9 @@ function renderWeekContent(containerId, weekData) {
   html += `
   <table style="width: 100%; table-layout: fixed;">
     <colgroup>
-      <col style="width: 15%;">
-      <col style="width: 23%;">
-      <col style="width: 27%;">
+      <col style="width: 13%;">
+      <col style="width: 24%;">
+      <col style="width: 28%;">
       <col style="width: 15%;">
       <col style="width: 5%;">
       <col style="width: 9%;">
