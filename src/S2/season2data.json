@@ -246,7 +246,7 @@
       "points": 1,
       "fastestPoints": "1st = 2 points\n2nd = 1 point",
       "difficulty": "Easy",
-      ]
+        "speedruns": []
     },
     {
       "mapName": "You Need Two (Official FWO)",
@@ -286,8 +286,7 @@
       "points": 3,
       "fastestPoints": "1st = 2 points\n2nd = 1 point",
       "difficulty": "Medium",
-      "speedruns": [
-      ]
+      "speedruns": []
     },
     {
       "mapName": "Barbed Wire (Official FWO)",
