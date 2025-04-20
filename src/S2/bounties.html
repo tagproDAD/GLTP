@@ -7,22 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="top-bar">
-        <div class="nav">
-            <a href="home.html">Home</a>
-            <a href="#" onclick="window.location.href='home.html#standings'">Standings</a>
-            <a href="#" onclick="window.location.href='home.html#ofm'">OFM</a>
-            <a href="#" onclick="window.location.href='home.html#week1'">Week 1</a>
-            <a href="#" onclick="window.location.href='home.html#week2'">Week 2</a>
-            <a href="#" onclick="window.location.href='home.html#week3'">Week 3</a>
-            <a href="#" onclick="window.location.href='home.html#rosters'">Rosters</a>
-            <a href="#" onclick="window.location.href='home.html#links'">Info & Links</a>
-            <a href="bounties.html" class="active">Bounties</a>
-        </div>
-    </div>
-
     <h1>GLTP Season 2 Bounties</h1>
-    <p>Bounties are one-off challenges where the first team to complete the challenge receives the full points. No speedruns for these challenges.</p>
+    <p class="white-header">Bounties are one-off challenges where the first team to complete the challenge receives the full points. No speedruns for these challenges.</p>
 
     <table style="width: 100%; table-layout: fixed;">
         <colgroup>
@@ -33,9 +19,9 @@
             <col style="width: 10%;">
         </colgroup>
         <tr>
-            <th>Bounty Name</th>
-            <th>Map Link</th>
-            <th>Description</th>
+            <th>Map</th>
+            <th>Group Preset</th>
+            <th>Details</th>
             <th>Points</th>
             <th>Status</th>
         </tr>
@@ -43,23 +29,22 @@
         <!-- Harry Botter Bounty -->
         <tr>
             <td>
-                <strong>Harry Botter and the Shaft of Dangers</strong><br>
-                by Madoka & FWO
+              <a href="https://fortunatemaps.herokuapp.com/map/90026" target="_blank">Harry Botter and the Shaft of Dangers <br> by Madoka & FWO </a>
             </td>
             <td>
-                <a href="https://fortunatemaps.herokuapp.com/map/90026" target="_blank">View Map on FortuneMaps</a>
-                <br><br>
-                <img src="https://i.imgur.com/tvQGmTG.png" alt="Harry Botter Map" style="max-width: 100%; height: auto; border-radius: 5px;">
+              <span class="map-id">gZMefHpoggtaiaaaJyaraaksaaaYEG</span> <br> <br>
+              <button class="copy-button" onclick="copyMapID(this)">Copy Preset</button>
+              <button class="open-button" onclick="openMap(this)">Launch Group</button>
             </td>
             <td>
                 <ul>
-                    <li>3 Ball Map (cannot have 4 or more, just like in the movie)</li>
-                    <li>Not known whether this is possible or not</li>
+                    <li>3 Ball Map (cannot have 4 or more)</li>
+                    <li>Not proven to be possible yet</li>
                     <li>First team to complete it will get the points</li>
-                    <li>Scripting will only be permitted after W3 maps get released</li>
+                    <li>Scripting permitted after W3 maps get released</li>
                 </ul>
             </td>
-            <td>2</td>
+            <td>3</td>
             <td><span class="status unclaimed">Unclaimed</span></td>
         </tr>
 
@@ -77,14 +62,6 @@
         </tr>
         -->
     </table>
-
-    <h2>Submission Requirements</h2>
-    <ul>
-        <li>VOD required for all bounty completions</li>
-        <li>Submit VODs to the bounty submission channel in Discord</li>
-        <li>Commissioners will verify and award points</li>
-        <li>All normal GLTP rules apply unless explicitly stated otherwise in the bounty description</li>
-    </ul>
 
     <script>
         // Functions for any interactive elements could go here if needed
