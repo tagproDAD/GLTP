@@ -252,7 +252,7 @@ function renderWeekContent(containerId, weekData) {
     html += `
     <table>
       <tr>
-        <th colspan="6">${map.mapName}</th>
+        <th class="centered" colspan="6">${map.mapName}</th>
       </tr>
       <tr>
         <th>Rank</th>

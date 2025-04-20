@@ -221,3 +221,7 @@ th {
 .white-header {
   color: #e0e0e0;
 }
+
+.centered {
+  text-align: center;
+}
