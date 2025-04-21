@@ -118,6 +118,8 @@ th, td {
 td {
   text-align: center;
   color: #e0e0e0;
+  word-break: break-word;
+  white-space: normal;
 }
 th {
   background-color: #e3e3e3;
