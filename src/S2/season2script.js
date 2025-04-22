@@ -118,7 +118,7 @@ function calculateAllTeamPoints(data) {
     team["Week2\nPoints"] = 0;
     team["Week3\nPoints"] = 0;
     team["Total\nPoints"] = 0;
-    team["Bounties"] = 0;
+    team.bounties = 0;
   });
 
   // Calculate points for each week
@@ -179,7 +179,7 @@ function calculateBountyPoints(teams, bountyData) {
     });
 
     // Update team data
-    team["Bounties"] += bountyCompletionPoints;
+    team.bounties += bountyCompletionPoints;
   });
 }
 
@@ -366,7 +366,7 @@ function renderStandings(containerId, teamsData) {
         <td>${team["Week1\nPoints"]}</td>
         <td>${team["Week2\nPoints"]}</td>
         <td>${team["Week3\nPoints"]}</td
-        <td>${team["Bounties"]}</td>
+        <td>${team.bounties}</td>
       </tr>
     `;
   });
