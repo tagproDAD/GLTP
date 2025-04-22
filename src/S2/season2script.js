@@ -178,7 +178,7 @@ function calculateBountyPoints(teams, bountyData) {
     });
 
     // Update team data
-    team["Bounties"] += weekCompletionPoints;
+    team["Bounties"] += bountyCompletionPoints;
   });
 }
 
