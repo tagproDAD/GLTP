@@ -140,7 +140,7 @@ function calculateAllTeamPoints(data) {
 
   // Calculate total points
   data.teams.forEach(team => {
-    team["Total\nPoints"] = team["Completion\nPoints"] + team["Speedrun\nPoints"];
+    team["Total\nPoints"] = team["Completion\nPoints"] + team["Speedrun\nPoints"] + team.bounties;
   });
 }
 
