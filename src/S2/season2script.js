@@ -365,7 +365,7 @@ function renderStandings(containerId, teamsData) {
         <td>${team["Speedrun\nPoints"]}</td>
         <td>${team["Week1\nPoints"]}</td>
         <td>${team["Week2\nPoints"]}</td>
-        <td>${team["Week3\nPoints"]}</td
+        <td>${team["Week3\nPoints"]}</td>
         <td>${team.bounties}</td>
       </tr>
     `;
