@@ -118,6 +118,7 @@ function calculateAllTeamPoints(data) {
     team["Week2\nPoints"] = 0;
     team["Week3\nPoints"] = 0;
     team["Total\nPoints"] = 0;
+    team["Bounties"] = 0;
   });
 
   // Calculate points for each week
