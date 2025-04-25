@@ -28,6 +28,7 @@ This document tracks tasks and ideas for the project. Items are grouped by categ
 - [ ] Better maps classification/categories in spreadsheet
 - [ ] Document Atomic Mechs
 - [ ] Documentation
+- [ ] Add "speedun mode" that converts group preset to use map testing mode
 
 ---
 
@@ -42,21 +43,15 @@ This document tracks tasks and ideas for the project. Items are grouped by categ
 - [ ] Auto generated new maps
 - [ ] Button to spawn a new group with a new bot
 - [ ] https://www.speedrun.com/TagPro
+- [ ] launch SB army for afk maps (donger kong, afk buddy, minigolf)
 
 
 ---
 
 ## 🐛 Known Bugs
 
-- [ ] Login form sometimes submits twice on mobile
-- [ ] Image uploads occasionally fail in Safari
-- [ ] Modal background click not dismissing as expected
-
----
-
-## 📌 Notes
-
-- Prioritize accessibility (a11y) improvements after MVP
+- [ ] tagpro bug 2 games get created when launched from group
+- [ ] clicking launch group from website logs user out
 
 ---
 
@@ -121,37 +116,37 @@ This document tracks tasks and ideas for the project. Items are grouped by categ
 
 ## ✅ Bot v1.3 – Completed Tasks
 
-- ✅ Enforce group is listed publicly, even when playing private games
-- ✅ `INFO` command
-- ✅ Automatically create the group if not found
-- ✅ Use aggregate fun rating
-- ✅ `LAUNCHNEW <preset> <map ID override>`
-- ✅ Don't pull new map if no users
-- ✅ Log game (replay) UUID
-- ✅ Fix empty preset crashing bot bug
-- ✅ Add WR to `MAP` command, post-process world records in a separate thread
-- ✅ Save all replays; setup pipeline to resolve world records
-- ✅ Add 1-second delay between preset load and launch to avoid partial preset update bug
-- ✅ Say map name when game is launched (in addition to `MAP` command)
-- ✅ Bug fix: when dad joined, bot launched previous (stale) map instead of getting new one
-- ✅ `MODERATE` command
-- ✅ Preset info in `MAP` command
-- ✅ `INFO <query>`
-- ✅ Support multiple-caps-to-win maps (e.g., races)
-- ✅ Bugfix: map difficulty not shown mid-game
-- ✅ WR quotes (last message sent by WR cap)
-- ✅ `REGION` command
+- [x] Enforce group is listed publicly, even when playing private games
+- [x] `INFO` command
+- [x] Automatically create the group if not found
+- [x] Use aggregate fun rating
+- [x] `LAUNCHNEW <preset> <map ID override>`
+- [x] Don't pull new map if no users
+- [x] Log game (replay) UUID
+- [x] Fix empty preset crashing bot bug
+- [x] Add WR to `MAP` command, post-process world records in a separate thread
+- [x] Save all replays; setup pipeline to resolve world records
+- [x] Add 1-second delay between preset load and launch to avoid partial preset update bug
+- [x] Say map name when game is launched (in addition to `MAP` command)
+- [x] Bug fix: when dad joined, bot launched previous (stale) map instead of getting new one
+- [x] `MODERATE` command
+- [x] Preset info in `MAP` command
+- [x] `INFO <query>`
+- [x] Support multiple-caps-to-win maps (e.g., races)
+- [x] Bugfix: map difficulty not shown mid-game
+- [x] WR quotes (last message sent by WR cap)
+- [x] `REGION` command
 
 ---
 
 ## ✅ Bot v1.4 – Completed Tasks
 
-- ✅ Pseudo Map ID support
-- ✅ Mars ball fix (why no Mars buddy climb record?)
+- [x] Pseudo Map ID support
+- [x] Mars ball fix (why no Mars buddy climb record?)
   - ℹ️ Requires map changes:
     - For Mars ball cap: set score to 3
     - For Mars flag cap: ensure blue-only cap support
-- ✅ Incorporate `allow blue caps` column
+- [x] Incorporate `allow blue caps` column
 
 ---
 
