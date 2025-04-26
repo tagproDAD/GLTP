@@ -1,6 +1,6 @@
 # 📝 Project TODOs
 
-This document tracks tasks and ideas for the project. Items are grouped by category for clarity.
+This document tracks tasks and ideas for the project
 
 ---
 
@@ -23,12 +23,13 @@ This document tracks tasks and ideas for the project. Items are grouped by categ
 - [ ] Display **total number of completions** per map
 - [ ] Separate Classic / Grav maps on leaderboard
 - [ ] Implement map voting (with account system or signup to ensure one vote per person) difficulty and fun ratings
-- [ ] Move bot workflow to cloud
+- [ ] Move bot workflow to cloud and decouple
 - [ ] Launch minigames from bot
 - [ ] Better maps classification/categories in spreadsheet
 - [ ] Document Atomic Mechs
 - [ ] Documentation
 - [ ] Add "speedun mode" that converts group preset to use map testing mode
+- [ ] Discord logo and favicon
 
 ---
 

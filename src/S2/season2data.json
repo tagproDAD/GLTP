@@ -61,6 +61,15 @@
           "team": "FWO",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=6746875e-23d1-4142-ba5c-5e6ef593d1b9",
           "includeOnSpeedrun": "yes"
+        },
+        {
+          "time": "2:44.009",
+          "players": [
+            "EvTheSmev"
+          ],
+          "team": "West Coasters",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=abc7590a-3461-4c7d-8378-75467284eb15",
+          "includeOnSpeedrun": "yes"
         }
       ]
     },
@@ -208,6 +217,26 @@
           "team": "FWO",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=7efa5c49-980e-44b8-95bb-d1d80a01b29b",
           "includeOnSpeedrun": "yes"
+        },
+        {
+          "time": "1:37.829",
+          "players": [
+            "BigBird"
+          ],
+          "team": "Momentum Mori",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=55f749df-1855-44b6-9163-255782dd8bcf",
+          "youtube": "https://youtu.be/f5q7Zln-plA",
+          "includeOnSpeedrun": "yes"
+        },
+        {
+          "time": "1:29.913",
+          "players": [
+            "DAD.",
+            "Madoka"
+          ],
+          "team": "FWO",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=d64daf90-74b5-485c-9311-f40630265170",
+          "includeOnSpeedrun": "yes"
         }
       ]
     },
@@ -326,6 +355,16 @@
           "team": "Fall Bondlers",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=ae8cbbcf-3ef5-487a-a820-ec7009176256",
           "includeOnSpeedrun": "yes"
+        },
+        {
+          "time": "4:55.874",
+          "players": [
+            "DAD.",
+            "Madoka"
+          ],
+          "team": "FWO",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=085e0b4f-2924-495c-8549-4e98cd40e9a8",
+          "includeOnSpeedrun": "yes"
         }
       ]
     }
@@ -381,6 +420,26 @@
           ],
           "team": "West Coasters",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=579252c8-70a6-41b6-8f81-8dd7cfbcbf1e",
+          "includeOnSpeedrun": "yes"
+        },
+        {
+          "time": "1:06.463",
+          "players": [
+            "EvTheSmev"
+          ],
+          "team": "West Coasters",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=a6c2effb-fb60-44f6-81c4-addc8a82b6da",
+          "includeOnSpeedrun": "yes"
+        },
+        {
+          "time": "0:46.457",
+          "players": [
+            "DAD.",
+            "Madoka",
+            "MarcusYallow"
+          ],
+          "team": "FWO",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=963cf693-296c-4378-8113-b379907a768c",
           "includeOnSpeedrun": "yes"
         }
       ]
@@ -512,7 +571,7 @@
           ],
           "team": "FWO",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=d93acda5-1fcc-491e-b51f-2a349659e168",
-          "includeOnSpeedrun": "yes"
+          "includeOnSpeedrun": "no"
         },
         {
           "time": "6:02.402",
@@ -523,7 +582,7 @@
           ],
           "team": "Fall Bondlers",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=97ee41c3-7195-4fa9-add7-29e4f2cf4de8",
-          "includeOnSpeedrun": "yes"
+          "includeOnSpeedrun": "no"
         },
         {
           "time": "12:48.128",
@@ -535,6 +594,38 @@
           ],
           "team": "West Coasters",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=c97a2683-590b-4061-abf2-34856bb7e27c",
+          "includeOnSpeedrun": "yes"
+        },
+        {
+          "time": "2:23.987",
+          "players": [
+            "DAD.",
+            "Madoka"
+          ],
+          "team": "FWO",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=42949c7d-6730-483c-bf65-b8d45912e45b",
+          "includeOnSpeedrun": "yes"
+        },
+        {
+          "time": "3:55.805",
+          "players": [
+            "Some Ball 64",
+            "LogisticMap",
+            "Bambi"
+          ],
+          "team": "Fall Bondlers",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=a6768492-574d-4393-b5fc-8645efac2b15",
+          "includeOnSpeedrun": "no"
+        },
+        {
+          "time": "3:00.238",
+          "players": [
+            "Some Ball 64",
+            "LogisticMap",
+            "Bambi"
+          ],
+          "team": "Fall Bondlers",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=d9423238-13f3-44f3-9835-21b520ad2a8b",
           "includeOnSpeedrun": "yes"
         }
       ]
@@ -571,6 +662,17 @@
           ],
           "team": "FWO",
           "replay": "https://tagpro.koalabeast.com/replays?uuid=f547606c-350b-4301-bf66-e5e4de3f0657",
+          "includeOnSpeedrun": "no"
+        },
+        {
+          "time": "12:58.826",
+          "players": [
+            "DAD.",
+            "Madoka",
+            "MarcusYallow"
+          ],
+          "team": "FWO",
+          "replay": "https://tagpro.koalabeast.com/replays?uuid=6943566b-5fad-4259-8381-2e582b6a04ad",
           "includeOnSpeedrun": "yes"
         }
       ]
@@ -694,7 +796,8 @@
         "bleast",
         "Valerian",
         "Tinderfella",
-        "TeaForYou&Me"
+        "TeaForYou&Me",
+        "o o l e r"
       ]
     },
     {
