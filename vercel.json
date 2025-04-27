@@ -1,4 +1,18 @@
 {
+  "builds": [
+    {
+      "src": "build.js",
+      "use": "@vercel/static-build",
+      "config": {}
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/docs/$1"
+    }
+  ],
+  "outputDirectory": "docs",
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" }
   ]
