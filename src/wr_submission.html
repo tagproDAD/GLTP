@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TagPro Replay Parser</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button { padding: 10px; margin: 5px; }
+    pre { background: #f5f5f5; padding: 20px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>TagPro Replay Parser</h1>
+  <input id="uuid" placeholder="Enter Replay UUID">
+  <button onclick="parseReplay()">Parse Replay</button>
+  <pre id="output"></pre>
+
+  <script>
+    async function fetchReplay(uuid) {
+      const response = await fetch(`https://tagpro.koalabeast.com/replays/data?uuid=${uuid}`);
+      if (!response.ok) throw new Error("Failed to fetch metadata");
+      const metadata = await response.json();
+      if (!metadata.games || metadata.games.length !== 1) {
+        throw new Error("Unexpected replay format");
+      }
+
+      const gameId = metadata.games[0].id;
+      const gameResponse = await fetch(`https://tagpro.koalabeast.com/replays/gameFile?gameId=${gameId}`);
+      if (!gameResponse.ok) throw new Error("Failed to fetch replay data");
+
+      const text = await gameResponse.text();
+      const lines = text.trim().split("\n").map(line => JSON.parse(line));
+      return lines;
+    }
+
+    function formatMilliseconds(milliseconds) {
+      const minutes = Math.floor(milliseconds / 60000);
+      const seconds = (milliseconds % 60000) / 1000;
+      return `${minutes}:${seconds.toFixed(3).padStart(6, '0')}`;
+    }
+
+    async function fetchMaps() {
+      const response = await fetch("https://docs.google.com/spreadsheets/d/1OnuTCekHKCD91W39jXBG4uveTCCyMxf9Ofead43MMCU/export?format=csv&gid=1775606307");
+      if (!response.ok) throw new Error("Failed to fetch map data");
+      const csvText = await response.text();
+
+      const rows = csvText.trim().split("\n").map(row => row.split(","));
+      const headers = rows.shift(); // remove the header row
+
+      return rows.map(row => {
+        return {
+          name: row[headers.indexOf("Map / Player")],
+          preset: row[headers.indexOf("Group Preset")],
+          difficulty: row[headers.indexOf("Final Rating")],
+          fun: row[headers.indexOf("Final Fun \nRating")],
+          category: row[headers.indexOf("Category")],
+          map_id: row[headers.indexOf("Map ID")],
+          equivalent_map_ids: row[headers.indexOf("Pseudo \nMap ID")].split(","),
+          caps_to_win: row[headers.indexOf("Num\nof caps")],
+          allow_blue_caps: row[headers.indexOf("Allow Blue Caps")].trim() === "TRUE"
+        };
+      });
+    }
+
+    function cleanMapName(name) {
+      const parts = name.rsplit(" by ", 1);
+      return parts.length === 2 && parts[1].length <= 100 ? parts[0] : name;
+    }
+
+    function getDetails(replay, maps) {
+      if (replay[0][1] !== "recorder-metadata") {
+        throw new Error("Invalid replay format");
+      }
+
+      const metadata = replay[0][2];
+      const mapData = replay[2][2];
+      const players = {};
+
+      metadata.players.forEach(player => {
+        players[player.id] = {
+          name: player.displayName,
+          user_id: player.userId,
+          is_red: player.team === 1
+        };
+      });
+
+      const firstTimePacket = replay.find(r => r[1] === 'time');
+      const firstTimerTs = firstTimePacket ? firstTimePacket[2].time : 0;
+
+      let recordTime = null;
+      let cappingUserName = null;
+      let cappingUserId = null;
+      let cappingPlayerQuote = null;
+
+      const capPackets = replay.filter(r => r[1] === 'p');
+
+      for (const [cap_time, , caps] of capPackets) {
+        for (const capDetails of caps) {
+          const cappingPlayerInGameId = capDetails.id;
+          const cappingPlayer = players[cappingPlayerInGameId];
+          if (!cappingPlayer) continue; // Skip invalid caps
+
+          recordTime = cap_time - firstTimerTs;
+          cappingUserName = cappingPlayer.name;
+          cappingUserId = cappingPlayer.user_id;
+
+          const playerChats = replay.filter(r => r[1] === 'chat' && r[2].from === cappingPlayerInGameId);
+          cappingPlayerQuote = playerChats.length ? playerChats[playerChats.length - 1][2].message : null;
+
+          break; // Only grab the first matching cap
+        }
+        if (recordTime !== null) break;
+      }
+
+      // Look for the map in the fetched maps
+      const mapId = mapData.info.name;
+      const matchedMap = maps.find(map => cleanMapName(map.name) === mapId);
+      const capsToWin = matchedMap ? matchedMap.caps_to_win : 1;
+      const allowBlueCaps = matchedMap ? matchedMap.allow_blue_caps : false;
+
+      return {
+        map_name: mapData.info.name,
+        map_author: mapData.info.author,
+        players: Object.values(players),
+        capping_player: cappingUserName,
+        capping_player_user_id: cappingUserId,
+        record_time: recordTime !== null ? formatMilliseconds(recordTime) : null,
+        is_solo: Object.keys(players).length === 1,
+        timestamp: metadata.started,
+        uuid: metadata.uuid,
+        capping_player_quote: cappingPlayerQuote,
+        caps_to_win: capsToWin,
+        allow_blue_caps: allowBlueCaps
+      };
+    }
+
+    async function parseReplay() {
+      const uuid = document.getElementById("uuid").value.trim();
+      const output = document.getElementById("output");
+      output.textContent = "Loading...";
+
+      try {
+        const replay = await fetchReplay(uuid);
+        const maps = await fetchMaps();
+        const details = getDetails(replay, maps);
+        output.textContent = JSON.stringify(details, null, 2);
+      } catch (error) {
+        output.textContent = "Error: " + error.message;
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>
