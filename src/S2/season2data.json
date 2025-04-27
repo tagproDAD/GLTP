@@ -678,6 +678,190 @@
       ]
     }
   ],
+  "week3": [
+    {
+      "mapName": "PacMan with Gravity (Easier) (Official FWO)",
+      "author": "ImNoSomeBall",
+      "link": "https://fortunatemaps.herokuapp.com/map/82065",
+      "recommendedBalls": "1+",
+      "preset": "gZMefHlEggtaiaaaJyaraaksaaamaaEYE",
+      "speedrunPreset": "gZMefHlEggtaiaaaJyaraaasaaamaaEYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 2,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Easy",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Gravity Challenge (85% Complete)",
+      "author": "QX",
+      "link": "https://fortunatemaps.herokuapp.com/map/46903",
+      "recommendedBalls": "1+",
+      "preset": "gZMefEwlggtaiaaaJraaksaaamaaYE",
+      "speedrunPreset": "gZMefEwlggtaiaaaJyaraaasaaamaaYYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Easy",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "20by30 test",
+      "author": "Retegrade",
+      "link": "https://fortunatemaps.herokuapp.com/map/89792",
+      "recommendedBalls": "1+",
+      "preset": "gZMefHhOggtaiaaaJraaksaaamaaauaaajbE",
+      "speedrunPreset": "gZMefHhOggtaiaaaJyaraaasaaamaaauaaaYjbEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant\nno RB or JJ",
+      "points": 2,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "The Caverns Below by Snack",
+      "author": "SB Army SB'",
+      "link": "https://fortunatemaps.herokuapp.com/map/89059",
+      "recommendedBalls": "1+",
+      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Bruh!",
+      "author": "FranticGamer",
+      "link": "https://fortunatemaps.herokuapp.com/map/88665",
+      "recommendedBalls": "1+",
+      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Unlimited Jumps Buddy (Official FWO)",
+      "author": "Carey Price & FWO",
+      "link": "https://fortunatemaps.herokuapp.com/map/88668",
+      "recommendedBalls": "1+",
+      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Gravity Buddy System [FIXED]",
+      "author": "bowtie and DYD",
+      "link": "https://fortunatemaps.herokuapp.com/map/23115",
+      "recommendedBalls": "2+",
+      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Randomly Generated Mapwe (Official FWO)",
+      "author": "ImNoSomeBallawe",
+      "link": "https://fortunatemaps.herokuapp.com/map/82521",
+      "recommendedBalls": "1+",
+      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Toothy",
+      "author": "Mr. Hat",
+      "link": "https://fortunatemaps.herokuapp.com/map/10433",
+      "recommendedBalls": "1+",
+      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Zag",
+      "author": "Ball-E",
+      "link": "https://fortunatemaps.herokuapp.com/map/89754",
+      "recommendedBalls": "1+",
+      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Mars Climb Part 3",
+      "author": "Ball-E",
+      "link": "https://fortunatemaps.herokuapp.com/map/86706",
+      "recommendedBalls": "1+",
+      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Buddy System 11 (TM1 Version) 9bob9",
+      "author": "Team 1",
+      "link": "https://fortunatemaps.herokuapp.com/map/82027",
+      "recommendedBalls": "2+",
+      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 3,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Medium",
+      "speedruns": [
+      ]
+    },
+    {
+      "mapName": "Detonation Dash",
+      "author": "DAD.",
+      "link": "https://fortunatemaps.herokuapp.com/map/89550",
+      "recommendedBalls": "1+",
+      "preset": "gZMefGUfggtaiaaaJyaraaksaaamaaaE",
+      "speedrunPreset": "gZMefGUfggtaiaaaJyaraaasaaamaaaYEG",
+      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
+      "points": 4,
+      "fastestPoints": "1st = 2 points\n2nd = 1 point",
+      "difficulty": "Very Hard",
+      "speedruns": [
+      ]
+    }
+  ],
   "bounties": [
     {
       "mapName": "Harry Botter and the Shaft of Dangers",
