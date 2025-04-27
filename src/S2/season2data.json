@@ -722,34 +722,6 @@
       ]
     },
     {
-      "mapName": "The Caverns Below by Snack",
-      "author": "SB Army SB'",
-      "link": "https://fortunatemaps.herokuapp.com/map/89059",
-      "recommendedBalls": "1+",
-      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
-      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
-      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
-      "points": 3,
-      "fastestPoints": "1st = 2 points\n2nd = 1 point",
-      "difficulty": "Medium",
-      "speedruns": [
-      ]
-    },
-    {
-      "mapName": "Bruh!",
-      "author": "FranticGamer",
-      "link": "https://fortunatemaps.herokuapp.com/map/88665",
-      "recommendedBalls": "1+",
-      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
-      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
-      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
-      "points": 3,
-      "fastestPoints": "1st = 2 points\n2nd = 1 point",
-      "difficulty": "Medium",
-      "speedruns": [
-      ]
-    },
-    {
       "mapName": "Unlimited Jumps Buddy (Official FWO)",
       "author": "Carey Price & FWO",
       "link": "https://fortunatemaps.herokuapp.com/map/88668",
@@ -792,23 +764,9 @@
       ]
     },
     {
-      "mapName": "Toothy",
-      "author": "Mr. Hat",
-      "link": "https://fortunatemaps.herokuapp.com/map/10433",
-      "recommendedBalls": "1+",
-      "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
-      "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
-      "settings": "Bomb Respawn: Instant\nBoost Respawn: Instant",
-      "points": 3,
-      "fastestPoints": "1st = 2 points\n2nd = 1 point",
-      "difficulty": "Medium",
-      "speedruns": [
-      ]
-    },
-    {
-      "mapName": "Zag",
-      "author": "Ball-E",
-      "link": "https://fortunatemaps.herokuapp.com/map/89754",
+      "mapName": "Ball From Space",
+      "author": "9bob9",
+      "link": "https://fortunatemaps.herokuapp.com/map/88764",
       "recommendedBalls": "1+",
       "preset": "gZMefHkmggtuiaaaJyaraaksaaamaaaE",
       "speedrunPreset": "gZMefHkmggtuiaaaJyaraaasaaamaaaYEG",
