@@ -16,13 +16,33 @@
   <pre id="output"></pre>
 
   <script>
-  async function fetchReplay(uuid) {
-    const response = await fetch(`https://your-vercel-project.vercel.app/api/fetchReplay?uuid=${uuid}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch replay data");
+  //async function fetchReplay(uuid) {
+  //  const response = await fetch(`https://your-vercel-project.vercel.app/api/fetchReplay?uuid=${uuid}`);
+  //  if (!response.ok) {
+  //    throw new Error("Failed to fetch replay data");
+  //  }
+  //  return await response.json();
+  //  }
+
+    async function fetchReplay(uuid) {
+    const proxyUrl = "https://corsproxy.io/?";
+    const metadataResponse = await fetch(`${proxyUrl}https://tagpro.koalabeast.com/replays/data?uuid=${uuid}`);
+    if (!metadataResponse.ok) throw new Error("Failed to fetch metadata");
+
+    const metadata = await metadataResponse.json();
+    if (!metadata.games || metadata.games.length !== 1) {
+      throw new Error("Unexpected replay format");
     }
-    return await response.json();
-    }
+
+    const gameId = metadata.games[0].id;
+    const gameResponse = await fetch(`${proxyUrl}https://tagpro.koalabeast.com/replays/gameFile?gameId=${gameId}`);
+    if (!gameResponse.ok) throw new Error("Failed to fetch replay data");
+
+    const text = await gameResponse.text();
+    const lines = text.trim().split("\n").map(line => JSON.parse(line));
+    return lines;
+  }
+
 
     function formatMilliseconds(milliseconds) {
       const minutes = Math.floor(milliseconds / 60000);
