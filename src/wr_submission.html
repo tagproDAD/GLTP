@@ -140,24 +140,27 @@
       let cappingUserId = null;
       let cappingPlayerQuote = null;
 
-      const capPackets = replay.filter(r => r[1] === 'p');
-      for (const [cap_time, , caps] of capPackets) {
-        for (const capDetails of caps) {
-          const cappingPlayerInGameId = capDetails.id;
-          const cappingPlayer = players[cappingPlayerInGameId];
+      for (const [ts, type, data] of replay) {
+        if (type !== 'p') continue;
+
+        for (const playerData of data) {
+          if (!playerData["s-captures"] || playerData["s-captures"] < 1) continue;
+
+          const cappingPlayer = players[playerData.id];
           if (!cappingPlayer) continue;
 
-          recordTime = cap_time - firstTimerTs;
+          recordTime = ts - firstTimerTs;
           cappingUserName = cappingPlayer.name;
           cappingUserId = cappingPlayer.user_id;
 
-          const playerChats = replay.filter(r => r[1] === 'chat' && r[2].from === cappingPlayerInGameId);
+          const playerChats = replay.filter(r => r[1] === 'chat' && r[2].from === playerData.id);
           cappingPlayerQuote = playerChats.length ? playerChats[playerChats.length - 1][2].message : null;
 
           break;
         }
         if (recordTime !== null) break;
       }
+
 
       let matchedMap = maps.find(m => m.map_id === mapId);
       if (!matchedMap) {
