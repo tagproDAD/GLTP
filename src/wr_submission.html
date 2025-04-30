@@ -160,85 +160,86 @@
     }
 
     function getDetails(replay, maps) {
-      if (replay[0][1] !== "recorder-metadata" || replay[2][1] !== "map" || replay[3][1] !== "clientInfo") {
-        throw new Error("Invalid replay format");
-      }
-
-      const metadata = replay[0][2];
-      const mapData = replay[2][2];
-      const mapfile = replay[3][2]?.mapfile;
-      const mapId = mapfile ? mapfile.split("/")[1] : null;
-
-      const players = {};
-      metadata.players.forEach(player => {
-        players[player.id] = {
-          name: player.displayName,
-          user_id: player.userId,
-          is_red: player.team === 1
-        };
-      });
-
-      const firstTimerTs = replay.find(r => r[1] === 'time' && r[2]?.state === 1)?.[0] ?? 0;
-
-      let recordTime = null;
-      let cappingUserName = null;
-      let cappingUserId = null;
-      let cappingPlayerQuote = null;
-
-      for (const [ts, type, data] of replay) {
-        if (type !== 'p') continue;
-
-        for (const playerData of data) {
-          if (!playerData["s-captures"] || playerData["s-captures"] < 1) continue;
-
-          const cappingPlayer = players[playerData.id];
-          if (!cappingPlayer) continue;
-
-          recordTime = ts - firstTimerTs;
-          cappingUserName = cappingPlayer.name;
-          cappingUserId = cappingPlayer.user_id;
-
-          const playerChats = replay.filter(r => r[1] === 'chat' && r[2].from === playerData.id);
-          cappingPlayerQuote = playerChats.length ? playerChats[playerChats.length - 1][2].message : null;
-
-          break;
-        }
-        if (recordTime !== null) break;
-      }
-
-
-      let matchedMap = maps.find(m => m.map_id === mapId);
-      if (!matchedMap) {
-        matchedMap = maps.find(m => m.equivalent_map_ids.includes(String(mapId)));
-      }
-
-      let capsToWin = 1;
-      let allowBlueCaps = false;
-      let effectiveMapId = mapId;
-
-      if (matchedMap) {
-        const capsRaw = matchedMap.caps_to_win;
-        capsToWin = capsRaw === "pups" ? Infinity : parseInt(capsRaw || "1", 10);
-        allowBlueCaps = !!matchedMap.allow_blue_caps;
-        effectiveMapId = matchedMap.map_id;
-      }
-
-      return {
-        map_name: mapData.info.name,
-        map_author: mapData.info.author,
-        players: Object.values(players),
-        capping_player: cappingUserName,
-        capping_player_user_id: cappingUserId,
-        record_time: recordTime !== null ? formatMilliseconds(recordTime) : null,
-        is_solo: Object.keys(players).length === 1,
-        timestamp: metadata.started,
-        uuid: metadata.uuid,
-        capping_player_quote: cappingPlayerQuote,
-        caps_to_win: capsToWin,
-        allow_blue_caps: allowBlueCaps,
-        effective_map_id: effectiveMapId
-      };
+    if (replay[0][1] !== "recorder-metadata" || replay[2][1] !== "map" || replay[3][1] !== "clientInfo") {
+      throw new Error("Invalid replay format");
     }
+
+    const metadata = replay[0][2];
+    const mapData = replay[2][2];
+    const mapfile = replay[3][2]?.mapfile;
+    const mapId = mapfile ? mapfile.split("/")[1] : null;
+
+    const players = {};
+    metadata.players.forEach(player => {
+      players[player.id] = {
+        name: player.displayName,
+        user_id: player.userId,
+        is_red: player.team === 1
+      };
+    });
+
+    const firstTimerTs = replay.find(r => r[1] === 'time' && r[2]?.state === 1)?.[0] ?? 0;
+
+    let recordTime = null;
+    let cappingUserName = null;
+    let cappingUserId = null;
+    let cappingPlayerQuote = null;
+
+    // Get the caps_to_win from the maps
+    let matchedMap = maps.find(m => m.map_id === mapId);
+    if (!matchedMap) {
+      matchedMap = maps.find(m => m.equivalent_map_ids.includes(String(mapId)));
+    }
+
+    let capsToWin = 1;  // Default to 1 if no map is matched
+    if (matchedMap) {
+      const capsRaw = matchedMap.caps_to_win;
+      capsToWin = capsRaw === "pups" ? Infinity : parseInt(capsRaw || "1", 10);
+    }
+
+    // Look for the timestamp when the correct s-captures value is reached (equal to capsToWin)
+    for (const [ts, type, data] of replay) {
+      if (type !== 'p') continue;
+
+      for (const playerData of data) {
+        const captures = playerData["s-captures"];
+        if (captures !== capsToWin) continue;  // Only proceed if s-captures matches capsToWin
+
+        const cappingPlayer = players[playerData.id];
+        if (!cappingPlayer) continue;
+
+        // Record the time and player info
+        recordTime = ts - firstTimerTs;
+        cappingUserName = cappingPlayer.name;
+        cappingUserId = cappingPlayer.user_id;
+
+        // Capture player chat (if any)
+        const playerChats = replay.filter(r => r[1] === 'chat' && r[2].from === playerData.id);
+        cappingPlayerQuote = playerChats.length ? playerChats[playerChats.length - 1][2].message : null;
+
+        // Break the loop once the first matching capture is found
+        break;
+      }
+      if (recordTime !== null) break;
+    }
+
+    return {
+      map_name: mapData.info.name,
+      map_author: mapData.info.author,
+      players: Object.values(players),
+      capping_player: cappingUserName,
+      capping_player_user_id: cappingUserId,
+      record_time: recordTime !== null ? formatMilliseconds(recordTime) : null,
+      is_solo: Object.keys(players).length === 1,
+      timestamp: metadata.started,
+      uuid: metadata.uuid,
+      capping_player_quote: cappingPlayerQuote,
+      caps_to_win: capsToWin,
+      allow_blue_caps: matchedMap ? matchedMap.allow_blue_caps : false,
+      effective_map_id: mapId
+    };
+  }
+
 
 
     async function parseReplay() {
