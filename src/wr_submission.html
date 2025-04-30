@@ -11,7 +11,7 @@
 </head>
 <body>
   <h1>TagPro Replay Parser</h1>
-  <input id="uuid" placeholder="Enter Replay UUID">
+  <input id="uuidInput" placeholder="Enter UUID or full replay URL">
   <button onclick="parseReplay()">Parse Replay</button>
   <pre id="output"></pre>
 
@@ -23,11 +23,17 @@
   //  }
   //  return await response.json();
   //  }
+  function extractUUID(input) {
+    const uuidRegex = /[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/i;
+    const match = input.match(uuidRegex);
+    return match ? match[0] : null;
+    }
+
 
     async function fetchReplay(uuid) {
     const proxyUrl = "https://corsproxy.io/?";
     const metadataResponse = await fetch(`${proxyUrl}https://tagpro.koalabeast.com/replays/data?uuid=${uuid}`);
-    if (!metadataResponse.ok) throw new Error("Failed to fetch metadata");
+    if (!metadataResponse.ok) throw new Error("Failed to fetch metadata, make sure you're using the UUID");
 
     const metadata = await metadataResponse.json();
     if (!metadata.games || metadata.games.length !== 1) {
@@ -202,6 +208,8 @@
       output.textContent = "Loading...";
 
       try {
+        const uuidMatch = input.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
+        const uuid = uuidMatch ? uuidMatch[0] : input;
         const replay = await fetchReplay(uuid);
         const maps = await fetchMaps();
         const details = getDetails(replay, maps);
