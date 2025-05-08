@@ -30,6 +30,10 @@ This document tracks tasks and ideas for the project
 - [ ] Documentation
 - [ ] Add "speedun mode" that converts group preset to use map testing mode
 - [ ] Discord logo and favicon
+- [ ] Input sanitize
+- [ ] Page to replace the spreadsheet?
+- [ ] Click on username to see all the maps completed and best times on an individual level
+- [ ] Solo only records different?
 
 ---
 

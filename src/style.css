@@ -60,6 +60,20 @@ body {
   overflow-x: auto;
 }
 
+button {
+  padding: 10px 16px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 4px;
+}
+
+button:hover {
+  background-color: #0078d7;
+}
 /* Table styles for Maps and Recent Records */
 .table-container table {
   width: 100%;
@@ -67,6 +81,17 @@ body {
   background-color: #1f1f1f;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
+}
+
+#mapsTable {
+  table-layout: fixed;
+}
+
+#mapsTable td.map-name {
+  max-width: 600px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 #mapsRecordsContainer table th,
@@ -156,19 +181,10 @@ input[type="checkbox"] {
   margin-right: 8px;
 }
 
-#mapsTable thead th:nth-child(2) {
-  text-indent: -210px;
-}
-
-#mapsTable td:nth-child(2) {
-  text-indent: -200px;
-  font-weight: bold;
-}
-
 .copy-button {
   top: 3px;
   position: relative;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 /* Additional styling enhancements */
@@ -178,4 +194,120 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+/* New styles for detail sections */
+.detail-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.left-detail {
+  border: 1px solid #333;
+  padding: 10px;
+  border-radius: 5px;
+  min-width: 200px;
+  background-color: #1e1e1e;
+}
+
+.medal-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.medal-link {
+  text-decoration: none;
+}
+
+.medal-row {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid;
+  margin-bottom: 5px;
+  background-color: #1e1e1e;
+}
+
+.medal-label {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.medal-time {
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.capping-player-quote {
+  font-style: italic;
+  margin-top: 5px;
+  color: #888;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .detail-wrapper {
+    flex-direction: column;
+  }
+
+  .medal-panel {
+    margin-top: 10px;
+  }
+}
+
+.search-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid #444;  /* Dark theme border */
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    background-color: #2a2a2a;  /* Dark theme background */
+    color: #e0e0e0;  /* Dark theme text */
+    width: 300px;  /* Or whatever width you prefer */
+}
+
+.search-input:focus {
+    border-color: #1e90ff;  /* Match your theme color */
+}
+
+.upload-button {
+    margin-left: auto;
+    padding: 10px 16px;
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.upload-button:hover {
+    background-color: #0078d7;
+}
+
+.filter-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 10px;
+}
+
+.filter-select {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #1e1e1e;
+  color: #fff;
 }

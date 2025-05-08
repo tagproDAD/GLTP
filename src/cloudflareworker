@@ -1,0 +1,63 @@
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    // Helper: Create a response with CORS headers
+    function createResponse(body, init = {}) {
+      const headers = new Headers(init.headers || {});
+      headers.set("Content-Type", "application/json");
+      headers.set("Access-Control-Allow-Origin", "*");
+      return new Response(JSON.stringify(body), {
+        ...init,
+        headers
+      });
+    }
+
+    // Handle OPTIONS requests for CORS preflight
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        status: 204,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization"
+        }
+      });
+    }
+
+    // Handle POST /upload for file upload.
+    if (request.method === "POST" && url.pathname === "/upload") {
+      const password = url.searchParams.get("password");
+      if (password !== env.password) {
+        return createResponse({ status: "error", message: "Unauthorized" }, { status: 401 });
+      }
+
+      let jsonData;
+      try {
+        jsonData = await request.json();
+      } catch (error) {
+        return createResponse({ status: "error", message: "Invalid JSON" }, { status: 400 });
+      }
+
+      await env.FILES.put("latest.json", JSON.stringify(jsonData));
+      return createResponse({ status: "success", message: "File uploaded and replaced!" });
+    }
+
+    // Handle GET / to view the stored JSON.
+    if (url.pathname === "/") {
+      const data = await env.FILES.get("latest.json");
+      if (!data) {
+        return createResponse({ status: "error", message: "No JSON file found." }, { status: 404 });
+      }
+      // If data is already JSON, you could simply return it with proper headers:
+      return new Response(data, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
+      });
+    }
+
+    return createResponse({ status: "error", message: "Not found" }, { status: 404 });
+  }
+};
