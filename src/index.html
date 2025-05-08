@@ -91,6 +91,12 @@
   </div>
 
   <script type="module" src="home.js"></script>
-
+  <script>
+    new Choices('#categoryFilter', {
+      removeItemButton: true,
+      placeholderValue: 'Select categories',
+      searchPlaceholderValue: 'Search...',
+    });
+  </script>
 </body>
 </html>
