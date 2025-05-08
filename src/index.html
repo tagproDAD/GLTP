@@ -10,6 +10,8 @@
   <script>
     window.BUILD_VERSION = "{{BUILD_VERSION}}";
   </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 </head>
 <body>
 
@@ -36,9 +38,10 @@
         </select>
 
         <select id="categoryFilter" class="filter-select" multiple>
-          <!-- Dynamically populated -->
+          <option value="buddy">buddy</option>
+          <option value="checkpoint">checkpoint</option>
+          <option value="solo">solo</option>
         </select>
-
         <button id="uploadWrButton" class="upload-button">Check Replay Data</button>
       </div>
 
