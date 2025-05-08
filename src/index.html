@@ -26,20 +26,19 @@
   <div id="mapsRecordsContainer">
     <!-- Left: Maps Table -->
     <div id="mapsTableContainer" class="table-container">
-      <div class="filter-row">
+      <div class="search-row">
+        <input type="text" id="mapSearch" placeholder="Search maps..." class="search-input">
+
         <select id="gravityFilter" class="filter-select">
           <option value="">All Types</option>
           <option value="grav">Gravity</option>
           <option value="classic">Classic</option>
         </select>
 
-        <select id="categoryFilter" class="filter-select">
-          <option value="">All Categories</option>
+        <select id="categoryFilter" class="filter-select" multiple>
           <!-- Dynamically populated -->
         </select>
-      </div>
-      <div class="search-row">
-        <input type="text" id="mapSearch" placeholder="Search maps..." class="search-input">
+
         <button id="uploadWrButton" class="upload-button">Check Replay Data</button>
       </div>
 

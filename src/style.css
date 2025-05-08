@@ -297,17 +297,25 @@ a:hover {
     background-color: #0078d7;
 }
 
-.filter-row {
+.search-row {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1 1 200px;
 }
 
 .filter-select {
-  padding: 5px 10px;
+  padding: 5px 8px;
   font-size: 14px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
   background: #1e1e1e;
   color: #fff;
+  border: 1px solid #444;
+  border-radius: 4px;
+  min-width: 120px;
+  max-height: 100px;
 }
