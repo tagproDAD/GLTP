@@ -8,18 +8,17 @@ body {
   color: #e0e0e0;
 }
 
-/* Top bar for navigation - IMPROVED */
+/* Top bar for navigation */
 .top-bar {
   background-color: #1f1f1f;
-  padding: 12px 20px;
+  padding: 10px 20px;
   color: #e0e0e0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .nav {
@@ -32,9 +31,8 @@ body {
   text-decoration: none;
   padding: 8px 16px;
   border-radius: 4px;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
   cursor: pointer;
-  font-weight: 500;
 }
 
 .nav a:hover {
@@ -43,7 +41,6 @@ body {
 
 .nav a.active {
   background-color: #1e90ff;
-  color: white;
   font-weight: bold;
 }
 
@@ -72,13 +69,11 @@ button {
   cursor: pointer;
   font-weight: bold;
   margin: 4px;
-  transition: background-color 0.2s ease;
 }
 
 button:hover {
   background-color: #0078d7;
 }
-
 /* Table styles for Maps and Recent Records */
 .table-container table {
   width: 100%;
@@ -86,7 +81,6 @@ button:hover {
   background-color: #1f1f1f;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
-  overflow: hidden; /* Ensures the rounded corners work */
 }
 
 #mapsTable {
@@ -103,8 +97,9 @@ button:hover {
 #mapsRecordsContainer table th,
 #mapsRecordsContainer table td {
   font-size: 0.8rem;
-  padding: 8px 10px;
-  line-height: 1.3;
+  padding: 4px 6px;
+  line-height: 1.1;
+  height: 20px;
   border-bottom: 1px solid #444;
   text-align: left;
 }
@@ -112,8 +107,6 @@ button:hover {
 #mapsRecordsContainer table th {
   background-color: #2b2b2b;
   font-weight: bold;
-  position: sticky;
-  top: 0;
 }
 
 #mapsRecordsContainer table tr:hover {
@@ -135,231 +128,6 @@ button:hover {
   padding: 5px;
   margin-top: 5px;
   max-width: 400px;
-}
-
-/* FILTER CONTROLS - COMPLETELY REDESIGNED */
-.filter-container {
-  background-color: #1a1a1a;
-  padding: 16px 20px;
-  border-bottom: 1px solid #333;
-}
-
-.filter-content {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  max-width: 1200px;
-  margin: 0 auto;
-  flex-wrap: wrap;
-}
-
-.search-box {
-  flex: 1;
-  min-width: 200px;
-  position: relative;
-}
-
-.search-box input {
-  width: 100%;
-  background-color: #262626;
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 10px 12px;
-  color: #e0e0e0;
-  font-size: 14px;
-}
-
-.search-box input:focus {
-  outline: none;
-  border-color: #1e90ff;
-  box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
-}
-
-.filter-dropdown {
-  background-color: #262626;
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 9px 12px;
-  color: #e0e0e0;
-  font-size: 14px;
-  min-width: 120px;
-  cursor: pointer;
-  position: relative;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 32px;
-}
-
-.filter-dropdown:focus {
-  outline: none;
-  border-color: #1e90ff;
-  box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
-}
-
-.filter-button {
-  background-color: #1e90ff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.2s ease;
-}
-
-.filter-button:hover {
-  background-color: #0078d7;
-}
-
-/* Choices.js custom styling */
-.choices {
-  margin-bottom: 0;
-}
-
-.choices__inner {
-  background-color: #262626;
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 6px 8px;
-  min-height: 40px;
-}
-
-.choices.is-focused .choices__inner {
-  border-color: #1e90ff;
-  box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
-}
-
-.choices__list--dropdown {
-  background-color: #262626;
-  border: 1px solid #333;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  z-index: 101;
-}
-
-.choices__list--dropdown .choices__item--selectable {
-  color: #e0e0e0;
-  padding: 10px 12px;
-}
-
-.choices__list--dropdown .choices__item--selectable.is-highlighted {
-  background-color: #333;
-}
-
-.choices__list--multiple .choices__item {
-  background-color: #1e90ff;
-  border: none;
-  border-radius: 16px;
-  padding: 4px 10px;
-  font-size: 13px;
-  color: white;
-  margin-right: 6px;
-  margin-bottom: 5px;
-}
-
-.choices__input {
-  background-color: transparent;
-  color: #e0e0e0;
-  font-size: 14px;
-}
-
-.choices__placeholder {
-  opacity: 0.7;
-  color: #999;
-}
-
-/* Category pills display area */
-.selected-categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.category-pill {
-  background-color: #1e90ff;
-  color: white;
-  border-radius: 16px;
-  padding: 6px 12px;
-  display: inline-flex;
-  align-items: center;
-  font-size: 13px;
-}
-
-.category-pill .remove-category {
-  margin-left: 8px;
-  cursor: pointer;
-  opacity: 0.7;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.category-pill .remove-category:hover {
-  opacity: 1;
-}
-
-/* Custom multi-select dropdown appearance */
-.category-select-container {
-  position: relative;
-  min-width: 180px;
-}
-
-.category-select-box {
-  background-color: #262626;
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 10px 12px;
-  color: #e0e0e0;
-  font-size: 14px;
-  width: 100%;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.category-select-box:hover {
-  border-color: #444;
-}
-
-.category-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: #262626;
-  border: 1px solid #333;
-  border-radius: 0 0 4px 4px;
-  max-height: 250px;
-  overflow-y: auto;
-  z-index: 101;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  display: none;
-}
-
-.category-dropdown.open {
-  display: block;
-}
-
-.category-option {
-  padding: 10px 12px;
-  cursor: pointer;
-}
-
-.category-option:hover {
-  background-color: #333;
-}
-
-.category-option.selected {
-  background-color: rgba(30, 144, 255, 0.1);
-}
-
-.category-option input[type="checkbox"] {
-  margin-right: 8px;
 }
 
 /* Leaderboard page styles */
@@ -387,14 +155,14 @@ button:hover {
   background-color: #1f1f1f;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
-  overflow: hidden;
 }
 
 #leaderboardPage table th,
 #leaderboardPage table td {
   font-size: 0.7rem;
-  padding: 8px 10px;
-  line-height: 1.2;
+  padding: 3px 4px;
+  line-height: 1.1;
+  height: 20px;
   border-bottom: 1px solid #444;
   text-align: left;
 }
@@ -410,7 +178,6 @@ button:hover {
 
 /* Checkbox styling */
 input[type="checkbox"] {
-  accent-color: #1e90ff;
   margin-right: 8px;
 }
 
@@ -480,9 +247,193 @@ a:hover {
   color: #888;
 }
 
-/* Fix for Choices.js specific bugs */
-.choices__list--multiple .choices__item.is-highlighted {
+/* Responsive design */
+@media (max-width: 768px) {
+  .detail-wrapper {
+    flex-direction: column;
+  }
+
+  .medal-panel {
+    margin-top: 10px;
+  }
+}
+
+/* CSS-only improvements for the filter UI */
+
+/* Fix top navigation bar alignment and spacing */
+.top-bar {
+  background-color: #1f1f1f;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-start;  /* Left-align nav items */
+  gap: 30px;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+}
+
+/* Make active nav item have a more solid appearance */
+.nav a.active {
   background-color: #1e90ff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: white;
+}
+
+/* Fix search and filter row layout */
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+/* Enhance search input */
+.search-input {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  height: 38px;
+  flex: 1;
+}
+
+/* Improve select dropdown styling */
+.filter-select {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 14px;
+  height: 38px;
+  min-width: 120px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+/* Fix Choices.js styling */
+.choices {
+  margin-bottom: 0;
+}
+
+.choices__inner {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 5px 8px;
+  min-height: 38px;
+}
+
+/* Fix the choices list dropdown style */
+.choices__list--dropdown {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.choices__list--dropdown .choices__item--selectable {
+  color: #e0e0e0;
+  padding: 8px 12px;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+  background-color: #2a2a2a;
+}
+
+/* Improve tag styling */
+.choices__list--multiple .choices__item {
+  background-color: #026fc2;
+  border: none;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 13px;
+  color: white;
+  margin-right: 6px;
+  margin-bottom: 3px;
+}
+
+/* Fix input area */
+.choices__input {
+  background-color: transparent;
+  color: #e0e0e0;
+  font-size: 14px;
+}
+
+/* Fix placeholder styling */
+.choices__placeholder {
+  opacity: 0.7;
+  color: #999;
+}
+
+/* Button styling */
+button.upload-button {
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  height: 38px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button.upload-button:hover {
+  background-color: #0074d9;
+}
+
+/* Clean up the categories container */
+.category-chooser {
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 4px;
+  margin-top: 8px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, border-width 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.category-chooser.is-active {
+  max-height: 200px;
+  border-width: 1px;
+  overflow-y: auto;
+}
+
+/* Fix the tag container */
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+/* In case "Select categories" shows as a placeholder */
+.choices[data-type*="select-multiple"] .choices__inner {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+/* Specifically style the category button appearance */
+.choices__list--multiple .choices__item.is-highlighted {
+  background-color: #026fc2;
   opacity: 0.9;
 }
 
@@ -491,60 +442,84 @@ a:hover {
   border-left: none;
   padding-left: 4px;
   opacity: 0.7;
-  line-height: 1;
 }
 
 .choices__button:hover {
   opacity: 1;
 }
 
-/* Better focus states for accessibility */
-*:focus {
-  outline: none;
+/* When choices dropdown is open */
+.is-open .choices__inner {
+  border-radius: 4px 4px 0 0;
+  border-color: #444;
 }
 
-*:focus-visible {
-  outline: 2px solid #1e90ff;
-  outline-offset: 2px;
+/* For the specific category filter area - make it match the row style */
+#categorySelector {
+  background-color: #fff; /* Will be overridden by Choices.js */
+  border-radius: 4px;
+  max-width: 600px;
 }
 
-/* Responsive design improvements */
+/* Ensure proper alignment in the whole filter row */
+.search-row {
+  align-items: stretch;
+}
+
+/* Fix the active category pill styles */
+.category-pill {
+  background-color: #026fc2;
+  color: white;
+  border-radius: 16px;
+  padding: 5px 12px;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.category-pill .close-icon {
+  margin-left: 6px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.category-pill .close-icon:hover {
+  opacity: 1;
+}
+
+/* Style table headings to match the new style */
+#mapsTable th {
+  background-color: #2b2b2b;
+  padding: 10px 12px;
+  font-weight: 500;
+  color: #e0e0e0;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+/* Fix responsive behavior */
 @media (max-width: 768px) {
-  .top-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
+  .search-row {
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
-  .nav {
-    margin-top: 10px;
-    width: 100%;
-    justify-content: space-between;
+  .search-input {
+    flex: 1 1 100%;
   }
 
-  .filter-content {
-    flex-direction: column;
-    align-items: stretch;
+  .filter-select {
+    flex: 1 1 auto;
   }
 
-  .search-box, .category-select-container, .filter-dropdown {
-    width: 100%;
+  .choices {
+    flex: 1 1 100%;
   }
 
-  .filter-button {
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .detail-wrapper {
-    flex-direction: column;
-  }
-
-  #mapsRecordsContainer {
-    flex-direction: column;
-  }
-
-  #mapsTable {
-    font-size: 0.7rem;
+  button.upload-button {
+    flex: 0 0 auto;
+    margin-left: auto;
   }
 }
