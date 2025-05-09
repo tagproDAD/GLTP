@@ -19,9 +19,40 @@ export class MapsTable {
         this.mapsTableBody = document.getElementById('mapsTableBody');
         this.setupSorting();
         this.setupSearch();
+        this.setupFilters();
         this.replayUploader = new ReplayUploader();
         this.allRecords = []; // Store the full, unfiltered list
     }
+
+    setupFilters() {
+        const gravityFilter = document.getElementById('gravityFilter');
+        gravityFilter.addEventListener('change', () => {
+            this.applyFilters();
+        });
+    }
+
+    applyFilters() {
+        const searchInput = document.getElementById('mapSearch');
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const gravityFilter = document.getElementById('gravityFilter');
+        const selectedGravity = gravityFilter.value;
+
+        const filteredRecords = this.allRecords.filter(record => {
+            const mapName = record.map_name.toLowerCase();
+            const cappingPlayer = record.capping_player ? record.capping_player.toLowerCase() : '';
+            const matchesSearch = mapName.includes(searchTerm) || cappingPlayer.includes(searchTerm);
+
+            const metadata = this.mapMetadata[record.map_name] || {};
+            const mapType = metadata["Grav or classic"] || '';
+            const matchesGravity = selectedGravity === '' || mapType === selectedGravity;
+
+            return matchesSearch && matchesGravity;
+        });
+
+        this.recordsArray = filteredRecords;
+        this.render(filteredRecords);
+      }
+
 
     setupSorting() {
         const thElements = document.querySelectorAll("#mapsTable thead th");
@@ -53,20 +84,22 @@ export class MapsTable {
         clearButton.textContent = '×';
         clearButton.className = 'search-clear';
         clearButton.style.display = 'none';
-        
+
         const searchContainer = searchInput.parentElement;
         searchContainer.style.position = 'relative';
         searchContainer.appendChild(clearButton);
 
         clearButton.addEventListener('click', () => {
             searchInput.value = '';
-            this.render(this.allRecords);
+            gravityFilter.value = '';
+            this.applyFilters();
             clearButton.style.display = 'none';
             searchInput.focus();
         });
 
         searchInput.addEventListener('input', () => {
             clearButton.style.display = searchInput.value ? 'block' : 'none';
+            this.applyFilters();
         });
     }
 
@@ -137,7 +170,7 @@ export class MapsTable {
 
         this.recordsArray.sort((a, b) => {
             let aVal, bVal;
-            
+
             // Handle metadata fields
             if (property === "difficulty" || property === "balls_req") {
                 const aMetadata = this.mapMetadata[a.map_name] || {};
