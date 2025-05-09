@@ -206,7 +206,7 @@ export class MapsTable {
     }
 
     render(records) {
-        //this.allRecords = records; // Always keep the full list up to date
+        this.allRecords = records; // Always keep the full list up to date
         this.recordsArray = records;
         this.mapsTableBody.innerHTML = "";
         records.forEach(record => this.renderRow(record));
