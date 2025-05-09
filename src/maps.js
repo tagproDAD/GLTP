@@ -25,17 +25,25 @@ export class MapsTable {
     }
 
     setupFilters() {
+        const searchInput = document.getElementById('mapSearch');
         const gravityFilter = document.getElementById('gravityFilter');
+
+        searchInput.addEventListener('input', () => {
+            this.applyFilters();
+        });
+
         gravityFilter.addEventListener('change', () => {
             this.applyFilters();
         });
     }
 
+
     applyFilters() {
         const searchInput = document.getElementById('mapSearch');
-        const searchTerm = searchInput.value.toLowerCase().trim();
         const gravityFilter = document.getElementById('gravityFilter');
-        const selectedGravity = gravityFilter.value;
+
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const selectedGravity = gravityFilter.value; // "" for All Types
 
         const filteredRecords = this.allRecords.filter(record => {
             const mapName = record.map_name.toLowerCase();
@@ -51,7 +59,8 @@ export class MapsTable {
 
         this.recordsArray = filteredRecords;
         this.render(filteredRecords);
-      }
+    }
+
 
 
     setupSorting() {
