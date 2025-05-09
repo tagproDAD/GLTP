@@ -32,15 +32,14 @@ export class MapsTable {
     }
 
     applyFilters() {
-        const difficultyValue = document.getElementById('gravityFilter').value.toLowerCase();
+        const grav_or_classic = document.getElementById('gravityFilter').value.toLowerCase();
         const searchTerm = document.getElementById('mapSearch').value.toLowerCase().trim();
-
         const filtered = this.allRecords.filter(record => {
             const metadata = this.mapMetadata[record.map_name] || {};
-            const matchesDifficulty = difficultyValue === '' || (metadata.difficulty && metadata.difficulty.toLowerCase() === difficultyValue);
+            const matchesType = grav_or_classic === '' || (metadata.grav_or_classic && metadata.grav_or_classic.toLowerCase() === grav_or_classic);
             const matchesSearch = record.map_name.toLowerCase().includes(searchTerm) ||
                                   (record.capping_player && record.capping_player.toLowerCase().includes(searchTerm));
-            return matchesDifficulty && matchesSearch;
+            return matchesType && matchesSearch;
         });
 
         this.recordsArray = filtered;
