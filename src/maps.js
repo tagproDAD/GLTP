@@ -34,11 +34,17 @@ export class MapsTable {
     applyFilters() {
         const grav_or_classic = document.getElementById('gravityFilter').value.toLowerCase();
         const searchTerm = document.getElementById('mapSearch').value.toLowerCase().trim();
+
         const filtered = this.allRecords.filter(record => {
             const metadata = this.mapMetadata[record.map_name] || {};
-            const matchesType = grav_or_classic === '' || (metadata.grav_or_classic && metadata.grav_or_classic.toLowerCase() === grav_or_classic);
-            const matchesSearch = record.map_name.toLowerCase().includes(searchTerm) ||
-                                  (record.capping_player && record.capping_player.toLowerCase().includes(searchTerm));
+
+            const mapType = (metadata.grav_or_classic || "").toLowerCase();
+            const matchesType = grav_or_classic === '' || mapType === grav_or_classic;
+
+            const matchesSearch =
+                record.map_name.toLowerCase().includes(searchTerm) ||
+                (record.capping_player && record.capping_player.toLowerCase().includes(searchTerm));
+
             return matchesType && matchesSearch;
         });
 
@@ -46,8 +52,6 @@ export class MapsTable {
         this.mapsTableBody.innerHTML = "";
         filtered.forEach(record => this.renderRow(record));
     }
-
-
 
     setupSorting() {
         const thElements = document.querySelectorAll("#mapsTable thead th");
