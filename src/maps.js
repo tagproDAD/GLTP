@@ -54,13 +54,7 @@ export class MapsTable {
             });
         }
 
-        // Apply search filter if any
-        if (searchTerm !== '') {
-            filteredMaps = filteredMaps.filter(record =>
-                record.map_name.toLowerCase().includes(searchTerm) ||
-                (record.capping_player && record.capping_player.toLowerCase().includes(searchTerm))
-            );
-        }
+        
         filteredMaps.forEach(record => this.renderRow(record));
         //this.render(filteredMaps); // Render the filtered list
     }
