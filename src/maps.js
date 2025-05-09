@@ -61,8 +61,8 @@ export class MapsTable {
                 (record.capping_player && record.capping_player.toLowerCase().includes(searchTerm))
             );
         }
-
-        this.render(filteredMaps); // Render the filtered list
+        filteredMaps.forEach(record => this.renderRow(record));
+        //this.render(filteredMaps); // Render the filtered list
     }
 
 
@@ -222,7 +222,7 @@ export class MapsTable {
     }
 
     render(records) {
-        this.allRecords = records; // Always keep the full list up to date
+        //this.allRecords = records; // Always keep the full list up to date
         this.recordsArray = records;
         this.mapsTableBody.innerHTML = "";
         records.forEach(record => this.renderRow(record));
