@@ -38,31 +38,32 @@ export class MapsTable {
 
     applyFilters() {
         const selectedGravityType = document.getElementById('gravityFilter').value;
+        const searchTerm = document.getElementById('mapSearch').value.toLowerCase().trim();
 
-        let filteredMaps;
+        let filteredMaps = [...this.allRecords]; // Start with all records
 
-        if (!selectedGravityType) {
-            // No filter selected, show all maps
-            filteredMaps = [...this.allRecords]; // Use this.allRecords for the full, unfiltered list
-        } else {
-            // Filter maps based on the selected gravity type
-            filteredMaps = this.allRecords.filter(record => {
+        // Apply gravity filter if any
+        if (selectedGravityType) {
+            filteredMaps = filteredMaps.filter(record => {
                 const mapName = record.map_name;
                 const metadata = this.mapMetadata[mapName];
 
                 if (!metadata || !metadata['grav_or_classic']) return false;
 
-                // Check if the map's gravity type matches the selected filter
                 return metadata['grav_or_classic'].toLowerCase() === selectedGravityType.toLowerCase();
             });
         }
 
-        this.render(filteredMaps); // Assuming a render function exists
+        // Apply search filter if any
+        if (searchTerm !== '') {
+            filteredMaps = filteredMaps.filter(record =>
+                record.map_name.toLowerCase().includes(searchTerm) ||
+                (record.capping_player && record.capping_player.toLowerCase().includes(searchTerm))
+            );
+        }
+
+        this.render(filteredMaps); // Render the filtered list
     }
-
-
-
-
 
 
     setupSorting() {
