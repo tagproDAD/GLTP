@@ -14,8 +14,8 @@ body {
   padding: 10px 20px;
   color: #e0e0e0;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center !important;
+  align-items: center !important;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -260,14 +260,6 @@ a:hover {
 
 /* CSS-only improvements for the filter UI */
 
-/* Fix top navigation bar alignment and spacing */
-.top-bar {
-  background-color: #1f1f1f;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: flex-start;  /* Left-align nav items */
-  gap: 30px;
-}
 
 .nav {
   display: flex;
