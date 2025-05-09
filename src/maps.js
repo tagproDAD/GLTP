@@ -25,39 +25,29 @@ export class MapsTable {
     }
 
     setupFilters() {
-        const searchInput = document.getElementById('mapSearch');
-        const gravityFilter = document.getElementById('gravityFilter');
-
         // Ensure this is linked to the correct filter
         this.gravityFilter = document.getElementById('gravityFilter');
-
         // Listen for filter changes
         this.gravityFilter.addEventListener('change', () => this.applyFilters());
-
     }
 
     applyFilters() {
-        const selectedGravityType = document.getElementById('gravityFilter').value;
+        const difficultyValue = document.getElementById('gravityFilter').value.toLowerCase();
         const searchTerm = document.getElementById('mapSearch').value.toLowerCase().trim();
 
-        let filteredMaps = [...this.allRecords]; // Start with all records
+        const filtered = this.allRecords.filter(record => {
+            const metadata = this.mapMetadata[record.map_name] || {};
+            const matchesDifficulty = difficultyValue === '' || (metadata.difficulty && metadata.difficulty.toLowerCase() === difficultyValue);
+            const matchesSearch = record.map_name.toLowerCase().includes(searchTerm) ||
+                                  (record.capping_player && record.capping_player.toLowerCase().includes(searchTerm));
+            return matchesDifficulty && matchesSearch;
+        });
 
-        // Apply gravity filter if any
-        if (selectedGravityType) {
-            filteredMaps = filteredMaps.filter(record => {
-                const mapName = record.map_name;
-                const metadata = this.mapMetadata[mapName];
-
-                if (!metadata || !metadata['grav_or_classic']) return false;
-
-                return metadata['grav_or_classic'].toLowerCase() === selectedGravityType.toLowerCase();
-            });
-        }
-
-        
-        filteredMaps.forEach(record => this.renderRow(record));
-        //this.render(filteredMaps); // Render the filtered list
+        this.recordsArray = filtered;
+        this.mapsTableBody.innerHTML = "";
+        filtered.forEach(record => this.renderRow(record));
     }
+
 
 
     setupSorting() {
