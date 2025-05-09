@@ -28,38 +28,38 @@ export class MapsTable {
         const searchInput = document.getElementById('mapSearch');
         const gravityFilter = document.getElementById('gravityFilter');
 
-        searchInput.addEventListener('input', () => {
-            this.applyFilters();
-        });
+        // Ensure this is linked to the correct filter
+        this.gravityFilter = document.getElementById('gravityFilter');
 
-        gravityFilter.addEventListener('change', () => {
-            this.applyFilters();
-        });
+        // Listen for filter changes
+        this.gravityFilter.addEventListener('change', () => this.applyFilters());
+
     }
-
 
     applyFilters() {
-        const searchInput = document.getElementById('mapSearch');
-        const gravityFilter = document.getElementById('gravityFilter');
+      const selectedGravityType = this.gravityFilter.value;
 
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        const selectedGravity = gravityFilter.value; // "" for All Types
+      let filteredMaps;
 
-        const filteredRecords = this.allRecords.filter(record => {
-            const mapName = record.map_name.toLowerCase();
-            const cappingPlayer = record.capping_player ? record.capping_player.toLowerCase() : '';
-            const matchesSearch = mapName.includes(searchTerm) || cappingPlayer.includes(searchTerm);
+      if (!selectedGravityType) {
+        // No filter selected, show all maps
+        filteredMaps = [...this.mapRecords];
+      } else {
+        // Filter maps based on the selected gravity type
+        filteredMaps = this.mapRecords.filter(record => {
+          const mapName = record.name;
+          const metadata = this.mapMetadata[mapName];
 
-            const metadata = this.mapMetadata[record.map_name] || {};
-            const mapType = metadata["Grav or classic"] || '';
-            const matchesGravity = selectedGravity === '' || mapType === selectedGravity;
+          if (!metadata || !metadata['Grav or classic']) return false;
 
-            return matchesSearch && matchesGravity;
+          // Check if the map's gravity type matches the selected filter
+          return metadata['Grav or classic'].toLowerCase() === selectedGravityType.toLowerCase();
         });
+      }
 
-        this.recordsArray = filteredRecords;
-        this.render(filteredRecords);
+      this.render(filteredMaps);
     }
+
 
 
 
