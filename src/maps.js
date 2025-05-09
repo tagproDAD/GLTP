@@ -36,29 +36,30 @@ export class MapsTable {
 
     }
 
-    function applyFilters() {
-      const selectedGravityType = document.getElementById('gravityFilter').value;
+    applyFilters() {
+        const selectedGravityType = document.getElementById('gravityFilter').value;
 
-      let filteredMaps;
+        let filteredMaps;
 
-      if (!selectedGravityType) {
-        // No filter selected, show all maps
-        filteredMaps = [...mapRecords]; // mapRecords should be your full list of maps
-      } else {
-        // Filter maps based on the selected gravity type
-        filteredMaps = mapRecords.filter(record => {
-          const mapName = record.name;
-          const metadata = mapMetadata[mapName];
+        if (!selectedGravityType) {
+            // No filter selected, show all maps
+            filteredMaps = [...this.allRecords]; // Use this.allRecords for the full, unfiltered list
+        } else {
+            // Filter maps based on the selected gravity type
+            filteredMaps = this.allRecords.filter(record => {
+                const mapName = record.map_name;
+                const metadata = this.mapMetadata[mapName];
 
-          if (!metadata || !metadata['grav_or_classic']) return false;
+                if (!metadata || !metadata['grav_or_classic']) return false;
 
-          // Check if the map's gravity type matches the selected filter
-          return metadata['grav_or_classic'].toLowerCase() === selectedGravityType.toLowerCase();
-        });
-      }
+                // Check if the map's gravity type matches the selected filter
+                return metadata['grav_or_classic'].toLowerCase() === selectedGravityType.toLowerCase();
+            });
+        }
 
-      render(filteredMaps); // Assuming a render function exists
+        this.render(filteredMaps); // Assuming a render function exists
     }
+
 
 
 
