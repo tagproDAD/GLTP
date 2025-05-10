@@ -87,6 +87,7 @@ export class MapsTable {
         clearButton.addEventListener('click', () => {
             searchInput.value = '';
             gravityFilter.value = '';
+            this.render(this.allRecords);
             this.applyFilters();
             clearButton.style.display = 'none';
             searchInput.focus();
