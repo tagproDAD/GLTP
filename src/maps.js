@@ -83,7 +83,6 @@ export class MapsTable {
 
         const searchContainer = searchInput.parentElement;
         searchContainer.style.position = 'relative';
-        searchContainer.appendChild(clearButton);
 
         clearButton.addEventListener('click', () => {
             searchInput.value = '';
