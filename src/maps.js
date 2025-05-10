@@ -79,10 +79,7 @@ export class MapsTable {
         });
 
         // Add clear button functionality
-        const clearButton = document.createElement('button');
-        clearButton.textContent = '×';
-        clearButton.className = 'search-clear';
-        clearButton.style.display = 'none';
+        const clearButton = document.getElementById('search-clear');
 
         const searchContainer = searchInput.parentElement;
         searchContainer.style.position = 'relative';
