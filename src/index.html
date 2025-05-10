@@ -28,20 +28,21 @@
   <div id="mapsRecordsContainer">
     <!-- Left: Maps Table -->
     <div id="mapsTableContainer" class="table-container">
-      <div class="search-row" style="position: relative;">
-      <input type="text" id="mapSearch" placeholder="Search maps..." class="search-input">
-
-      <button id="search-clear" class="search-clear" style="display: none;">×</button>
-
-      <select id="gravityFilter" class="filter-select">
-        <option value="">All Types</option>
-        <option value="grav">Gravity</option>
-        <option value="classic">Classic</option>
-      </select>
-
-      <button id="uploadWrButton" class="upload-button">Check Replay Data</button>
+    <div class="search-row">
+      <div class="search-left">
+        <input type="text" id="mapSearch" placeholder="Search maps..." class="search-input">
+        <button id="search-clear" class="search-clear" style="display: none;">×</button>
+        <select id="gravityFilter" class="filter-select">
+          <option value="">All Types</option>
+          <option value="grav">Gravity</option>
+          <option value="classic">Classic</option>
+        </select>
+        <!-- You can add more elements here -->
+      </div>
+      <div class="search-right">
+        <button id="uploadWrButton" class="upload-button">Check Replay Data</button>
+      </div>
     </div>
-
 
       <table class="table" id="mapsTable">
         <colgroup>

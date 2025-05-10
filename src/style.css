@@ -455,11 +455,6 @@ button.upload-button:hover {
   max-width: 600px;
 }
 
-/* Ensure proper alignment in the whole filter row */
-.search-row {
-  align-items: stretch;
-}
-
 /* Fix the active category pill styles */
 .category-pill {
   background-color: #026fc2;
@@ -516,4 +511,23 @@ button.upload-button:hover {
     flex: 0 0 auto;
     margin-left: auto;
   }
+}
+
+.search-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* optional for responsiveness */
+  gap: 8px; /* optional spacing */
+}
+
+.search-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-right {
+  margin-left: auto;
 }
