@@ -28,16 +28,30 @@
   <div id="mapsRecordsContainer">
     <!-- Left: Maps Table -->
     <div id="mapsTableContainer" class="table-container">
-      <div class="search-row">
-        <input type="text" id="mapSearch" placeholder="Search maps..." class="search-input">
+      <div class="search-row" style="position: relative;">
+      <input type="text" id="mapSearch" placeholder="Search maps..." class="search-input">
 
-        <select id="gravityFilter" class="filter-select">
-          <option value="">All Types</option>
-          <option value="grav">Gravity</option>
-          <option value="classic">Classic</option>
-        </select>
-        <button id="uploadWrButton" class="upload-button">Check Replay Data</button>
-      </div>
+      <button id="clearSearchButton" class="search-clear" style="
+        position: absolute;
+        right: 260px; /* Adjust based on layout */
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        display: none;
+      ">×</button>
+
+      <select id="gravityFilter" class="filter-select">
+        <option value="">All Types</option>
+        <option value="grav">Gravity</option>
+        <option value="classic">Classic</option>
+      </select>
+
+      <button id="uploadWrButton" class="upload-button">Check Replay Data</button>
+    </div>
+
 
       <table class="table" id="mapsTable">
         <colgroup>
