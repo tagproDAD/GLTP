@@ -379,9 +379,11 @@ button.upload-button {
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 500;
-  height: 38px;
   cursor: pointer;
   white-space: nowrap;
+  flex: 0 0 auto;
+  margin-top: 0 !important;
+  height: 48px !important;
 }
 
 button.upload-button:hover {
@@ -513,7 +515,5 @@ button.upload-button:hover {
   button.upload-button {
     flex: 0 0 auto;
     margin-left: auto;
-    margin-top: 0 !important;
-    height: 48px !important;
   }
 }
