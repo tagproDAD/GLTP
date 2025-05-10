@@ -514,4 +514,16 @@ button.upload-button:hover {
     flex: 0 0 auto;
     margin-left: auto;
   }
+
+  #uploadWrButton {
+    margin: 0 !important;
+  }
+
+  #gravityFilter {
+    height: 48px !important;
+  }
+
+  #mapSearch {
+    height: 30px !important;
+  }
 }
